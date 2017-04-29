@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -36,13 +37,14 @@ public class EducationFeedbackController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("feedback") EducationFeedback educationFeedback, BindingResult bindingResult, Model model) {
+    public String save(@Valid @ModelAttribute("feedback") EducationFeedback educationFeedback, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("courses", courseService.list());
             return "education/educationForm";
         } else {
-            EducationFeedback savedEducationFeedback = educationFeedbackService.save(educationFeedback);
-            return "redirect:/admin/education/" + savedEducationFeedback.getId();
+            educationFeedbackService.save(educationFeedback);
+            redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted.");
+            return "redirect:/education/create";
         }
     }
 }

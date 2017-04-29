@@ -12,6 +12,10 @@
 		<h2>Write your feedback on education</h2>
 		<br/>
 
+		<div th:if="${message}" class="alert alert-success" role="alert">
+			<p th:text="${message}">success message</p>
+		</div>
+
 		<form class="form-horizontal" th:object="${feedback}" th:action="@{/education/save}" method="post">
 			<input type="hidden" th:field="*{id}" />
 			<div th:class="form-group" th:classappend="${#fields.hasErrors('course')}? 'has-error'">
@@ -45,7 +49,7 @@
 				</div>
 			</div>
 			<div th:class="form-group" th:classappend="${#fields.hasErrors('body')}? 'has-error'">
-				<label class="col-sm-2 control-label">Body <span class="required">*</span></label>
+				<label class="col-sm-2 control-label">Feedback <span class="required">*</span></label>
 				<div class="col-md-10">
 					<textarea class="form-control" rows="7" th:field="*{body}">body</textarea>
 					<span th:if="${#fields.hasErrors('body')}" th:errors="*{body}" th:class="help-block">Body Errors</span>

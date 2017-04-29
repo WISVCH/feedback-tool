@@ -12,4 +12,6 @@ import java.util.List;
 @Repository
 public interface EducationFeedbackRepository extends CrudRepository<EducationFeedback, Long> {
     List<EducationFeedback> findAllByOrderByPostedOnDesc();
+
+    List<EducationFeedback> findAllByHandledIsFalseOrderByPostedOnDesc();
 }

@@ -1,5 +1,6 @@
 package com.ch.controller.admin;
 
+import com.ch.domain.EducationFeedback;
 import com.ch.service.EducationFeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,15 +21,32 @@ public class AdminEducationFeedbackController {
         this.educationFeedbackService = educationFeedbackService;
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/inbox")
+    public String listInbox(Model model) {
+        model.addAttribute("posts", educationFeedbackService.listInbox());
+        return "admin/education/listInbox";
+    }
+
+    @RequestMapping("/archive")
     public String list(Model model) {
         model.addAttribute("posts", educationFeedbackService.list());
-        return "admin/education/list";
+        return "admin/education/listArchive";
     }
 
     @RequestMapping("/{id}")
     public String getEducationFeedback(@PathVariable long id, Model model) {
         model.addAttribute("feedback", educationFeedbackService.get(id));
         return "admin/education/view";
+    }
+
+    @RequestMapping("/handle/{id}")
+    public String handle(@PathVariable long id, Model model) {
+        EducationFeedback educationFeedback = educationFeedbackService.get(id);
+        boolean handle = !educationFeedback.isHandled();
+        educationFeedback.setHandled(handle);
+        educationFeedbackService.save(educationFeedback);
+
+        model.addAttribute("posts", educationFeedbackService.listInbox());
+        return "admin/education/listInbox";
     }
 }

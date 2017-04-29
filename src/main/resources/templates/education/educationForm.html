@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org"
+	  layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Education feedback</title>
+</head>
+<body>
+		
+	<div layout:fragment="content">
+	
+		<h2>Write your feedback on education</h2>
+		<br/>
+
+		<form class="form-horizontal" th:object="${feedback}" th:action="@{/education/save}" method="post">
+			<input type="hidden" th:field="*{id}" />
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('subject')}? 'has-error'">
+				<label class="col-sm-2 control-label">Subject <span class="required">*</span></label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" th:field="*{subject}"/>
+					<span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" th:class="help-block">Subject Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('body')}? 'has-error'">
+				<label class="col-sm-2 control-label">Body <span class="required">*</span></label>
+				<div class="col-md-10">
+					<textarea class="form-control" rows="7" th:field="*{body}">body</textarea>
+					<span th:if="${#fields.hasErrors('body')}" th:errors="*{body}" th:class="help-block">Body Errors</span>
+				</div>
+			</div>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('course')}? 'has-error'">
+		    	<label class="col-sm-2 control-label">Course <span class="required">*</span></label>
+		    	<div class="col-md-10">
+					<select class="form-control" th:field="*{course}">
+						<option value="">Select Course</option>
+						<option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.courseCode + ' ' + course.name}">Courses</option>
+					</select>
+					<span th:if="${#fields.hasErrors('course')}" th:errors="*{course}" th:class="help-block">Course Errors</span>
+		    	</div>
+		  	</div>		  	
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Your name</label>
+				<div class="col-md-10">
+					<input  type="text" class="form-control" th:field="*{senderName}">Optional</input>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Your email</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" th:field="*{senderMail}">Optional</input>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary pull-right">Send</button>
+		</form>		
+		
+		<br/><br/><br/>
+		
+	</div>
+		
+</body>
+</html>

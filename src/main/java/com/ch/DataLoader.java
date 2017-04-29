@@ -33,7 +33,7 @@ public class DataLoader {
         courseService.save(course2);
 
         AssociationFeedback associationFeedback1 = new AssociationFeedback();
-        associationFeedback1.setFeedbackType(FeedbackType.POSITIVE);
+        associationFeedback1.setFeedbackType(FeedbackType.Positive);
         associationFeedback1.setSubject("Uilen zijn episch!");
         associationFeedback1.setBody(this.getBody());
         associationFeedback1.setSenderName("Tom Harting");
@@ -41,7 +41,7 @@ public class DataLoader {
         associationFeedbackService.save(associationFeedback1);
 
         EducationFeedback educationFeedback1 = new EducationFeedback();
-        educationFeedback1.setFeedbackType(FeedbackType.POSITIVE);
+        educationFeedback1.setFeedbackType(FeedbackType.Positive);
         educationFeedback1.setSubject("Top vak");
         educationFeedback1.setBody(this.getBody());
         educationFeedback1.setSenderName("Anka Mulder");
@@ -50,7 +50,7 @@ public class DataLoader {
         educationFeedbackService.save(educationFeedback1);
 
         EducationFeedback educationFeedback2 = new EducationFeedback();
-        educationFeedback2.setFeedbackType(FeedbackType.NEGATIVE);
+        educationFeedback2.setFeedbackType(FeedbackType.Negative);
         educationFeedback2.setSubject("Vo Scala");
         educationFeedback2.setBody(this.getBody());
         educationFeedback2.setSenderName("E. Visser");

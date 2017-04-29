@@ -1,6 +1,7 @@
 package com.ch.domain;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,18 +30,19 @@ abstract class Feedback {
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat( pattern="M/dd/yyyy")
+    @DateTimeFormat( pattern="M/dd/yyyy hh:mm:ss a")
     Date postedOn;
 
     boolean handled;
 
     String senderName;
 
+    @Email
     String senderMail;
 
     Feedback() {
         this.postedOn = new Date();
         this.handled = false;
-        this.feedbackType = FeedbackType.POSITIVE;
+        this.feedbackType = FeedbackType.Positive;
     }
 }

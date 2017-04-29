@@ -6,12 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Tom on 29/04/2017.
  */
-@RestController
+@Controller
 @RequestMapping("/admin/education")
 public class AdminEducationFeedbackController {
     private EducationFeedbackService educationFeedbackService;
@@ -22,12 +21,14 @@ public class AdminEducationFeedbackController {
     }
 
     @RequestMapping("/list")
-    public String list() {
-        return educationFeedbackService.list().toString();
+    public String list(Model model) {
+        model.addAttribute("posts", educationFeedbackService.list());
+        return "admin/education/list";
     }
 
     @RequestMapping("/{id}")
     public String getEducationFeedback(@PathVariable long id, Model model) {
-        return educationFeedbackService.get(id).toString();
+        model.addAttribute("feedback", educationFeedbackService.get(id));
+        return "admin/education/view";
     }
 }

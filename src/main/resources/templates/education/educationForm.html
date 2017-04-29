@@ -44,10 +44,11 @@
 					<input  type="text" class="form-control" th:field="*{senderName}">Optional</input>
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Your email</label>
+			<div th:class="form-group" th:classappend="${#fields.hasErrors('senderMail')}? 'has-error'">
+				<label class="col-sm-2 control-label">Your email </label>
 				<div class="col-md-10">
 					<input type="text" class="form-control" th:field="*{senderMail}">Optional</input>
+					<span th:if="${#fields.hasErrors('senderMail')}" th:errors="*{senderMail}" th:class="help-block">Sender Mail Errors</span>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary pull-right">Send</button>

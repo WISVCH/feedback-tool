@@ -5,6 +5,8 @@ import com.ch.repository.EducationFeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Tom on 29/04/2017.
  */
@@ -20,5 +22,13 @@ public class EducationFeedbackService {
 
     public EducationFeedback save(EducationFeedback educationFeedback) {
         return educationFeedbackRepository.save(educationFeedback);
+    }
+
+    public List<EducationFeedback> list() {
+        return educationFeedbackRepository.findAllByOrderByPostedOnDesc();
+    }
+
+    public EducationFeedback get(long id) {
+        return educationFeedbackRepository.findOne(id);
     }
 }

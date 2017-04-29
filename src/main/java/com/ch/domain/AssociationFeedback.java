@@ -13,7 +13,4 @@ import javax.persistence.Id;
 @Data
 public class AssociationFeedback extends Feedback {
 
-    @Id
-    @GeneratedValue
-    long id;
 }

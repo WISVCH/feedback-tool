@@ -15,9 +15,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Data
 public class EducationFeedback extends Feedback{
-    @Id
-    @GeneratedValue
-    long id;
 
     @NotNull
     @ManyToOne
@@ -27,4 +24,18 @@ public class EducationFeedback extends Feedback{
         super();
     }
 
+    @Override
+    public String toString() {
+        return "EducationFeedback{" +
+                "id=" + id +
+                ", course=" + course +
+                ", feedbackType=" + feedbackType +
+                ", subject='" + subject + '\'' +
+                ", body='" + body + '\'' +
+                ", postedOn=" + postedOn +
+                ", handled=" + handled +
+                ", senderName='" + senderName + '\'' +
+                ", senderMail='" + senderMail + '\'' +
+                '}';
+    }
 }

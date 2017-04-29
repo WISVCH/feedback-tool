@@ -11,8 +11,11 @@ import java.util.Date;
 /**
  * Created by Tom on 29/04/2017.
  */
+@Entity
 @Data
 abstract class Feedback {
+    @Id @GeneratedValue
+    long id;
 
     @NotNull
     FeedbackType feedbackType;
@@ -24,7 +27,7 @@ abstract class Feedback {
     @Column(columnDefinition = "TEXT")
     String body;
 
-    @NotEmpty
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat( pattern="M/dd/yyyy")
     Date postedOn;

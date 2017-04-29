@@ -35,4 +35,12 @@ public class Course {
     public Course() {
         super();
     }
+
+    public Course(String courseCode, String name, String instructorName, String instructorMail, Program program) {
+        this.courseCode = courseCode;
+        this.name = name;
+        this.instructorName = instructorName;
+        this.instructorMail = instructorMail;
+        this.program = program;
+    }
 }

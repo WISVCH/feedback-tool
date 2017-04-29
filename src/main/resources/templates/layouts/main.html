@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Blog Main Layout</title>
+	<title>FeedbackTool Main Layout</title>
 	
 	<link rel="stylesheet" href="../static/css/blog.css" th:href="@{/css/blog.css}"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
@@ -27,7 +27,7 @@
 		<nav class="navbar navbar-default">
 		    <div class="container-fluid">
 		        <div class="navbar-header">
-		            <a class="navbar-brand" href="/">My Blog</a>
+		            <a class="navbar-brand" href="/">FeedbackTool</a>
 		        </div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				    <ul class="nav navbar-nav">
@@ -44,13 +44,13 @@
 				                <li><a href="/authors/list">List</a></li>
 				            </ul>
 				        </li>
-						<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ROLE_ADMIN')">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-				            <ul class="dropdown-menu">
-				                <li><a href="/admin/posts/">Posts</a></li>
-				                <li><a href="/admin/authors/">Authors</a></li>				                
-				            </ul>
-				        </li>					        
+						<!--<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ROLE_ADMIN')">-->
+				            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>-->
+				            <!--<ul class="dropdown-menu">-->
+				                <!--<li><a href="/admin/posts/">Posts</a></li>-->
+				                <!--<li><a href="/admin/authors/">Authors</a></li>				                -->
+				            <!--</ul>-->
+				        <!--</li>					        -->
 				    </ul>
 				    <div class="navbar-text navbar-right">
 			            Welcome <span sec:authentication="name">Guest</span> | 

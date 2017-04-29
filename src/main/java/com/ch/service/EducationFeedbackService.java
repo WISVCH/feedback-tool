@@ -1,5 +1,6 @@
 package com.ch.service;
 
+import com.ch.domain.EducationFeedback;
 import com.ch.repository.EducationFeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,9 @@ public class EducationFeedbackService {
     @Autowired
     public EducationFeedbackService(EducationFeedbackRepository educationFeedbackRepository) {
         this.educationFeedbackRepository = educationFeedbackRepository;
+    }
+
+    public EducationFeedback save(EducationFeedback educationFeedback) {
+        return educationFeedbackRepository.save(educationFeedback);
     }
 }

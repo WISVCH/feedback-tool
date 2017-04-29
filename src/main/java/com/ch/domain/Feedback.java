@@ -13,8 +13,6 @@ import java.util.Date;
  */
 @Data
 abstract class Feedback {
-    @Id @GeneratedValue
-    long id;
 
     @NotNull
     FeedbackType feedbackType;

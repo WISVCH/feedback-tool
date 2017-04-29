@@ -43,6 +43,5 @@ abstract class Feedback {
     Feedback() {
         this.postedOn = new Date();
         this.handled = false;
-        this.feedbackType = FeedbackType.Positive;
     }
 }

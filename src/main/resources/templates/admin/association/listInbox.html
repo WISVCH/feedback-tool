@@ -3,13 +3,13 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Education Feedback Inbox</title>
+	<title>Association Feedback Inbox</title>
 </head>
 <body>
 		
 	<div layout:fragment="content">
 	
-		<h2>Education Feedback Inbox</h2>
+		<h2>Association Feedback Inbox</h2>
 		
 		<div th:if="${message}" class="alert alert-success" role="alert">
 			<p th:text="${message}">success message</p>
@@ -19,7 +19,6 @@
 			<thead>
 				<tr>
 					<th>Posted On</th>
-					<th>Course</th>
 					<th>Subject</th>
 					<th>Type</th>
 					<th>Handled</th>
@@ -29,11 +28,10 @@
 			<tbody>
 				<tr th:each="post : ${posts}">
 					<td th:text="${#calendars.format(post.postedOn,'M/dd/yyyy hh:mm:ss a')}">posted on</td>
-					<td th:text="${post.course.courseCode}">course code</td>
 					<td th:text="${post.subject}">subject</td>
 					<td th:text="${post.feedbackType}">feedback type</td>
-					<td><a href="#" th:href="@{/admin/education/handle/} + ${post.id}" th:text="${post.handled}">handled</a></td>
-					<td><a href="#" th:href="@{/admin/education/} + ${post.id}">View</a></td>
+					<td><a href="#" th:href="@{/admin/association/handle/} + ${post.id}" th:text="${post.handled}">handled</a></td>
+					<td><a href="#" th:href="@{/admin/association/} + ${post.id}">View</a></td>
 				</tr>
 			</tbody>
 		</table>

@@ -37,7 +37,8 @@ public class EducationFeedbackController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("feedback") EducationFeedback educationFeedback, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String save(@Valid @ModelAttribute("feedback") EducationFeedback educationFeedback,
+                       BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("courses", courseService.list());
             return "education/educationForm";

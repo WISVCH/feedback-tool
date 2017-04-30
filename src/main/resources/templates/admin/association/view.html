@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<layout:html lang="en"
+			 xmlns:th="http://www.thymeleaf.org"
+			 layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+	<title>View Feedback</title>
+</head>
+<body>
+		
+	<div layout:fragment="content">
+	
+		<h2 th:text="${feedback.subject}">View Feedback</h2>
+
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Type</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${feedback.feedbackType}">type</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Posted On</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${#calendars.format(feedback.postedOn, 'M/dd/yyyy hh:mm:ss a')}">postedOn</p>
+				</div>
+			</div>
+			<div class="form-group">
+		    	<label class="col-sm-2 control-label">Handled</label>
+		    	<div class="col-md-10">
+		    		<p class="form-control-static" th:text="${feedback.handled}">handled</p>
+		    	</div>
+		  	</div>
+		  	<div class="form-group">
+		    	<label class="col-sm-2 control-label">Sender Name</label>
+		    	<div class="col-md-10">
+		    		<p class="form-control-static" th:text="${feedback.senderName}">sender name</p>
+		    	</div>
+		  	</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Sender Mail</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${feedback.senderMail}">sender mail</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Feedback</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${feedback.body}">body</p>
+				</div>
+			</div>
+		</form>
+		
+		<a th:href="@{/admin/association/inbox}">Back To Feedback List</a>
+		<br/><br/><br/>
+		
+	</div>
+		
+</body>
+</layout:html>

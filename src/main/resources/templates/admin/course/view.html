@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<layout:html lang="en"
+			 xmlns:th="http://www.thymeleaf.org"
+			 layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+	<title>View Course</title>
+</head>
+<body>
+		
+	<div layout:fragment="content">
+	
+		<h2 th:text="${course.name}">View course</h2>
+
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Course Code</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${course.courseCode}">courseCode</p>
+				</div>
+			</div>
+			<div class="form-group">
+		    	<label class="col-sm-2 control-label">Program</label>
+		    	<div class="col-md-10">
+		    		<p class="form-control-static" th:text="${course.program}">program</p>
+		    	</div>
+		  	</div>
+		  	<div class="form-group">
+		    	<label class="col-sm-2 control-label">Instructor</label>
+		    	<div class="col-md-10">
+		    		<p class="form-control-static" th:text="${course.instructorName}">instructor name</p>
+		    	</div>
+		  	</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Instructor Mail</label>
+				<div class="col-md-10">
+					<p class="form-control-static" th:text="${course.instructorMail}">instructor mail</p>
+				</div>
+			</div>
+		</form>
+
+		<br/><br/><br/>
+		
+	</div>
+		
+</body>
+</layout:html>

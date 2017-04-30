@@ -16,7 +16,7 @@
 			<div class="form-group">
 		    	<label class="col-sm-2 control-label">Course Code</label>
 		    	<div class="col-md-10">
-		    		<p class="form-control-static" th:text="${feedback.course.courseCode}">course code</p>
+		    		<a class="form-control-static" th:text="${feedback.course.courseCode}" th:href="@{/admin/course/} + ${feedback.course.courseCode}">course code</a>
 		    	</div>
 		  	</div>
 			<div class="form-group">

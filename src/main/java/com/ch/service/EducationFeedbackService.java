@@ -35,4 +35,8 @@ public class EducationFeedbackService {
     public List<EducationFeedback> listInbox() {
         return educationFeedbackRepository.findAllByHandledIsFalseOrderByPostedOnDesc();
     }
+
+    public List<EducationFeedback> getCourseFeedback(long id) {
+        return educationFeedbackRepository.findAllByCourseIdOrderByPostedOnDesc(id);
+    }
 }

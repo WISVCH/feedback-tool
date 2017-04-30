@@ -33,7 +33,8 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Instructor Mail</label>
 				<div class="col-md-10">
-					<p class="form-control-static" th:text="${course.instructorMail}">instructor mail</p>
+					<a class="form-control-static" th:text="${course.instructorMail}"
+					   th:href="'mailto:' + ${course.instructorMail} + '?Subject=Feedback regarding ' + ${course.courseCode}">instructor mail</a>
 				</div>
 			</div>
 		</form>

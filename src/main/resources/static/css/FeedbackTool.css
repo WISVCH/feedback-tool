@@ -7,7 +7,7 @@ header h1 {
 	font-size: 38px;
 }
 
-p, address, section {
+p, address, section, a {
 	font-family: 'Roboto', sans-serif;
 }
 

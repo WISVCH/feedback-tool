@@ -52,7 +52,8 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Sender Mail</label>
 				<div class="col-md-10">
-					<p class="form-control-static" th:text="${feedback.senderMail}">sender mail</p>
+					<a class="form-control-static" th:text="${feedback.senderMail}"
+					   th:href="'mailto:' + ${feedback.senderMail} + '?Subject=Reaction%20feedback: ' + ${feedback.subject}">sender mail</a>
 				</div>
 			</div>
 			<div class="form-group">

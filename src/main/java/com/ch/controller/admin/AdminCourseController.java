@@ -29,6 +29,7 @@ public class AdminCourseController {
 
     @RequestMapping("/{courseCode}")
     public String getCourse(@PathVariable String courseCode, Model model) {
+        courseCode = courseCode.toUpperCase();
         Course course = courseService.get(courseCode);
         List<EducationFeedback> feedbackOnCourse = educationFeedbackService.getCourseFeedback(course.getId());
         model.addAttribute("course", course);

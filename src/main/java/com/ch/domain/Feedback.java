@@ -30,7 +30,7 @@ abstract class Feedback {
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat( pattern="M/dd/yyyy hh:mm:ss a")
+    @DateTimeFormat( pattern="dd/MM/yyyy hh:mm:ss")
     Date postedOn;
 
     boolean handled;

@@ -38,8 +38,34 @@
 			</div>
 		</form>
 
-		<br/><br/><br/>
-		
+		<br/>
+
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Posted On</th>
+				<th>Subject</th>
+				<th>Type</th>
+				<th>Handled</th>
+				<th>View</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="post : ${feedbackOnCourse}">
+				<td th:text="${#calendars.format(post.postedOn,'dd/MM/yyyy HH:mm:ss')}">posted on</td>
+				<td th:text="${post.subject}">subject</td>
+				<td th:text="${post.feedbackType}">feedback type</td>
+				<td><a href="#" th:href="@{/admin/education/handle/} + ${post.id}" th:text="${post.handled}">handled</a></td>
+				<td><a href="#" th:href="@{/admin/education/} + ${post.id}">View</a></td>
+			</tr>
+			</tbody>
+		</table>
+
+		<br/><br/>
+
+		<p th:if="${feedbackOnCourse.size() == 0}">
+		<div class="alert alert-success" role="alert">No feedback on this course.</div>
+		</p>
 	</div>
 		
 </body>

@@ -29,8 +29,10 @@ public class DataLoader {
     private void loadData() {
         Course course1 = new Course("TI3306", "Complexiteitstheorie", "Cees Witteveen", "C.Witteveen@tudelft.nl", Program.BScTI);
         Course course2 = new Course("TI1206", "OOP", "Andy Zaidman", "A.Zaidman@tudelft.nl", Program.BScTI);
+        Course course3 = new Course("TI2206", "Software Engineering Methods", "Alberto Bachelli", "A.Bachelli@tudelft.nl", Program.BScTI);
         courseService.save(course1);
         courseService.save(course2);
+        courseService.save(course3);
 
         AssociationFeedback associationFeedback1 = new AssociationFeedback();
         associationFeedback1.setFeedbackType(FeedbackType.Positive);

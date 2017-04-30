@@ -28,7 +28,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="post : ${posts}">
-					<td th:text="${#calendars.format(post.postedOn,'M/dd/yyyy hh:mm:ss a')}">posted on</td>
+					<td th:text="${#calendars.format(post.postedOn,'dd/MM/yyyy HH:mm:ss')}">posted on</td>
 					<td th:text="${post.course.courseCode}">course code</td>
 					<td th:text="${post.subject}">subject</td>
 					<td th:text="${post.feedbackType}">feedback type</td>

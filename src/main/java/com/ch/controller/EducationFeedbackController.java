@@ -47,7 +47,7 @@ public class EducationFeedbackController {
             return "education/educationForm";
         } else {
             educationFeedbackService.save(educationFeedback);
-            notificationService.sendSenderNotification(educationFeedback);
+            notificationService.sendNotifications(educationFeedback);
             redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted.");
             return "redirect:/education/create";
         }

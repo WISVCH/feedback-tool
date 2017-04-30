@@ -33,22 +33,24 @@
 				    <ul class="nav navbar-nav">
 				        <li th:class="${controllerName == 'EducationFeedback'} ? 'active'"><a href="/education/create">Education</a></li>
 						<li th:class="${controllerName == 'AssociationFeedback'} ? 'active'"><a href="/association/create">Association</a></li>
-						<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-							<ul class="dropdown-menu">
+						<!--<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'">-->
+							<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>-->
+							<!--<ul class="dropdown-menu">-->
+								<!--<li><a href="/admin/education/inbox">Education Inbox</a></li>-->
+								<!--<li><a href="/admin/education/archive">Education Archive</a></li>-->
+								<!--<li><a href="/admin/association/inbox">Association Inbox</a></li>-->
+								<!--<li><a href="/admin/association/archive">Association Archive</a></li>-->
+							<!--</ul>-->
+						<!--</li>-->
+						<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ROLE_ADMIN')">
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+				            <ul class="dropdown-menu">
 								<li><a href="/admin/education/inbox">Education Inbox</a></li>
 								<li><a href="/admin/education/archive">Education Archive</a></li>
 								<li><a href="/admin/association/inbox">Association Inbox</a></li>
 								<li><a href="/admin/association/archive">Association Archive</a></li>
-							</ul>
-						</li>
-						<!--<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'" sec:authorize="hasRole('ROLE_ADMIN')">-->
-				            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>-->
-				            <!--<ul class="dropdown-menu">-->
-				                <!--<li><a href="/admin/posts/">Posts</a></li>-->
-				                <!--<li><a href="/admin/authors/">Authors</a></li>				                -->
-				            <!--</ul>-->
-				        <!--</li>					        -->
+				            </ul>
+				        </li>
 				    </ul>
 				    <div class="navbar-text navbar-right">
 			            Welcome <span sec:authentication="name">Guest</span> | 

@@ -47,7 +47,7 @@ public class DataLoader {
         educationFeedback1.setSubject("Top vak");
         educationFeedback1.setBody(this.getBody());
         educationFeedback1.setSenderName("Anka Mulder");
-        educationFeedback1.setSenderMail("anka@tudelft.nl");
+        educationFeedback1.setSenderMail("ankamulder@ch.tudelft.nl");
         educationFeedback1.setCourse(course1);
         educationFeedbackService.save(educationFeedback1);
 
@@ -56,7 +56,7 @@ public class DataLoader {
         educationFeedback2.setSubject("Vo Scala");
         educationFeedback2.setBody(this.getBody());
         educationFeedback2.setSenderName("E. Visser");
-        educationFeedback2.setSenderMail("cpl@tudelft.nl");
+        educationFeedback2.setSenderMail("eelcovisser@ch.tudelft.nl");
         educationFeedback2.setCourse(course2);
         educationFeedbackService.save(educationFeedback2);
     }

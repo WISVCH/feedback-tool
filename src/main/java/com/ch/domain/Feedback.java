@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Entity
 @Data
-abstract class Feedback {
+public abstract class Feedback {
     @Id @GeneratedValue
     long id;
 

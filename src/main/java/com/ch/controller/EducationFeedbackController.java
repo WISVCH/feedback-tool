@@ -3,6 +3,7 @@ package com.ch.controller;
 import com.ch.domain.EducationFeedback;
 import com.ch.service.CourseService;
 import com.ch.service.EducationFeedbackService;
+import com.ch.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,13 @@ import javax.validation.Valid;
 public class EducationFeedbackController {
     private EducationFeedbackService educationFeedbackService;
     private CourseService courseService;
+    private NotificationService notificationService;
 
     @Autowired
-    public EducationFeedbackController(EducationFeedbackService educationFeedbackService, CourseService courseService) {
+    public EducationFeedbackController(EducationFeedbackService educationFeedbackService, CourseService courseService, NotificationService notificationService) {
         this.educationFeedbackService = educationFeedbackService;
         this.courseService = courseService;
+        this.notificationService = notificationService;
     }
 
     @RequestMapping("/create")
@@ -44,6 +47,7 @@ public class EducationFeedbackController {
             return "education/educationForm";
         } else {
             educationFeedbackService.save(educationFeedback);
+            notificationService.sendSenderNotification(educationFeedback);
             redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted.");
             return "redirect:/education/create";
         }

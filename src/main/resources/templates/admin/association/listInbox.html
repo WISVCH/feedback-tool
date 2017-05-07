@@ -22,16 +22,14 @@
 					<th>Subject</th>
 					<th>Type</th>
 					<th>Handled</th>
-					<th>View</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="post : ${posts}">
+				<tr th:each="post : ${posts}" th:onclick="'document.location=' + ${post.id}" style="cursor:pointer">
 					<td th:text="${#calendars.format(post.postedOn,'dd/MM/yyyy HH:mm:ss')}">posted on</td>
 					<td th:text="${post.subject}">subject</td>
 					<td th:text="${post.feedbackType}">feedback type</td>
 					<td><a href="#" th:href="@{/admin/association/handle/} + ${post.id}" th:text="${post.handled}">handled</a></td>
-					<td><a href="#" th:href="@{/admin/association/} + ${post.id}">View</a></td>
 				</tr>
 			</tbody>
 		</table>

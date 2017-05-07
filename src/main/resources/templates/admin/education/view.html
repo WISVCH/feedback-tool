@@ -40,7 +40,7 @@
 			<div class="form-group">
 		    	<label class="col-sm-2 control-label">Handled</label>
 		    	<div class="col-md-10">
-		    		<p class="form-control-static" th:text="${feedback.handled}">handled</p>
+		    		<a class="form-control-static" th:text="${feedback.handled}" th:href="@{/admin/education/handle/} + ${feedback.id}">handled</a>
 		    	</div>
 		  	</div>
 		  	<div class="form-group">

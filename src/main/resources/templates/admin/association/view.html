@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Posted On</label>
 				<div class="col-md-10">
-					<p class="form-control-static" th:text="${#calendars.format(feedback.postedOn, 'M/dd/yyyy hh:mm:ss a')}">postedOn</p>
+					<p class="form-control-static" th:text="${#calendars.format(feedback.postedOn, 'dd/MM/yyyy hh:mm:ss')}">postedOn</p>
 				</div>
 			</div>
 			<div class="form-group">

@@ -37,11 +37,11 @@ public class NotificationService {
 	}
 
 	public void sendNotifications(Feedback feedback) {
-		this.sendSenderNotification(feedback);
 		this.sendAdminNotification(feedback);
+		this.sendSenderNotification(feedback);
 	}
 	
-	public void sendSenderNotification(Feedback feedback) {
+	private void sendSenderNotification(Feedback feedback) {
 		if (!feedback.getSenderMail().equals("")) {
 			try {
 				MimeMessage mail = javaMailSender.createMimeMessage();
@@ -68,7 +68,7 @@ public class NotificationService {
 		return "INSERT ASSOCIATION COPY HERE";
 	}
 
-	public void  sendAdminNotification(Feedback feedback) {
+	private void  sendAdminNotification(Feedback feedback) {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();
 			mail.setFrom(from);

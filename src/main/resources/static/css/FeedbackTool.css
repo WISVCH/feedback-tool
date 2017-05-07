@@ -7,12 +7,20 @@ header h1 {
 	font-size: 38px;
 }
 
-p, address, section, a {
+p, address, section, a, h3 {
 	font-family: 'Roboto', sans-serif;
+}
+
+h3 {
+    text-align: center;
 }
 
 address {
 	margin-top:20px;
+}
+
+tr:hover td {
+    background:#e5e5e5;
 }
 
 #frmlogout {

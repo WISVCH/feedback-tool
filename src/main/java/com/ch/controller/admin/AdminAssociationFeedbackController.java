@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Tom on 30/04/2017.
  */
@@ -40,13 +42,13 @@ public class AdminAssociationFeedbackController {
     }
 
     @RequestMapping("handle/{id}")
-    public String handle(@PathVariable long id, Model model) {
+    public String handle(@PathVariable long id, Model model, HttpServletRequest request) {
         AssociationFeedback associationFeedback = associationFeedbackService.get(id);
         boolean handle = !associationFeedback.isHandled();
         associationFeedback.setHandled(handle);
         associationFeedbackService.save(associationFeedback);
 
         model.addAttribute("posts", associationFeedbackService.listInbox());
-        return "admin/association/listInbox";
+        return "redirect:" + request.getHeader("Referer");
     }
 }

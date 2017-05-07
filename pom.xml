@@ -88,8 +88,7 @@
 		<dependency>
 			<groupId>ch.wisv</groupId>
 			<artifactId>wisvch-connect-client</artifactId>
-			<version>1.2.6.0</version>
-			<type>pom</type>
+			<version>1.2.6.4</version>
 		</dependency>
 	</dependencies>
 

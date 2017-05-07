@@ -78,6 +78,10 @@
 //                .and()
 //                .logout()
 //                .logoutSuccessUrl("/")
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+//				.anyRequest().permitAll()
 //        ;
 //    }
 //

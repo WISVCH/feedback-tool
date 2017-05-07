@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity( securedEnabled = true )
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig_old extends WebSecurityConfigurerAdapter {
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -29,5 +29,5 @@ public class SecurityConfig_old extends WebSecurityConfigurerAdapter {
 	}
 
 
-	
+
 }

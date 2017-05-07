@@ -34,6 +34,7 @@ public class AdminCourseController {
         List<EducationFeedback> feedbackOnCourse = educationFeedbackService.getCourseFeedback(course.getId());
         model.addAttribute("course", course);
         model.addAttribute("feedbackOnCourse", feedbackOnCourse);
+        model.addAttribute("link", "admin/education/");
 
         return "admin/course/view";
     }

@@ -48,7 +48,8 @@ public class EducationFeedbackController {
         } else {
             educationFeedbackService.save(educationFeedback);
             notificationService.sendNotifications(educationFeedback);
-            redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted.");
+            redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +
+                    " If you filled in your email, you will find a copy of your feedback in your mail.");
             return "redirect:/education/create";
         }
     }

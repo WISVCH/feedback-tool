@@ -39,7 +39,8 @@ public class AssociationFeedbackController {
             return "association/associationForm";
         } else {
             associationFeedbackService.save(associationFeedback);
-            redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted.");
+            redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +
+                    " If you filled in your email, you will find a copy of your feedback in your mail.");
             return "redirect:/association/create";
         }
     }

@@ -49,23 +49,15 @@ public class NotificationService {
 				mail.setFrom(from);
 				mail.setSubject("[CH FeedbackTool] Copy of your feedback: " + feedback.getSubject());
 				if (feedback instanceof EducationFeedback)
-					mail.setContent(copyEducationFeedback((EducationFeedback) feedback), "text/html");
+					mail.setContent(mailContentBuilder.buildEducationSender((EducationFeedback) feedback), "text/html");
 				else if (feedback instanceof AssociationFeedback)
-					mail.setContent(copyAssociationFeedback((AssociationFeedback) feedback),  "text/html");
+					mail.setContent(mailContentBuilder.buildAssociationSender((AssociationFeedback) feedback),  "text/html");
 				javaMailSender.send(mail);
 			}
 			catch (MessagingException e) {
 
 			}
 		}
-	}
-
-	public String copyEducationFeedback(EducationFeedback educationFeedback) {
-		return "<h1>Education Mail</h1>";
-	}
-
-	public String copyAssociationFeedback(AssociationFeedback associationFeedback) {
-		return "INSERT ASSOCIATION COPY HERE";
 	}
 
 	private void  sendAdminNotification(Feedback feedback) {

@@ -32,4 +32,15 @@ public class MailContentBuilder {
         return templateEngine.process("admin/mail/associationAdminMail", context);
     }
 
+    public String buildEducationSender(EducationFeedback educationFeedback) {
+        Context context = new Context();
+        context.setVariable("feedback", educationFeedback);
+        return templateEngine.process("education/educationMail", context);
+    }
+
+    public String buildAssociationSender(AssociationFeedback associationFeedback) {
+        Context context = new Context();
+        context.setVariable("feedback", associationFeedback);
+        return templateEngine.process("association/associationMail", context);
+    }
 }

@@ -1,9 +1,9 @@
 package com.ch.service;
 
-import com.ch.domain.AssociationFeedback;
-import com.ch.domain.EducationFeedback;
-import com.ch.domain.Feedback;
-import com.ch.domain.Program;
+import com.ch.domain.feedback.AssociationFeedback;
+import com.ch.domain.feedback.EducationFeedback;
+import com.ch.domain.feedback.Feedback;
+import com.ch.domain.course.ProgramEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +66,8 @@ public class NotificationService {
 			mail.setFrom(from);
 			mail.setSubject("[CH FeedbackTool] New feedback available");
 			if (feedback instanceof EducationFeedback) {
-				Program program = ((EducationFeedback) feedback).getCourse().getProgram();
-				if (program.equals(Program.BScTW) || program.equals(Program.MScAM)) {
+				ProgramEnum programEnum = ((EducationFeedback) feedback).getCourse().getProgramEnum();
+				if (programEnum.equals(ProgramEnum.BScTW) || programEnum.equals(ProgramEnum.MScAM)) {
 					mail.addRecipients(Message.RecipientType.TO, toEducationAM);
 				} else {
 					mail.addRecipients(Message.RecipientType.TO, toEducationCS);

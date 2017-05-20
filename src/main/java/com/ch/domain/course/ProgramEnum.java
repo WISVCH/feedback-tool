@@ -1,9 +1,9 @@
-package com.ch.domain;
+package com.ch.domain.course;
 
 /**
  * Created by Tom on 29/04/2017.
  */
-public enum Program {
+public enum ProgramEnum {
     BScTI,
     BScTW,
     MScCS,

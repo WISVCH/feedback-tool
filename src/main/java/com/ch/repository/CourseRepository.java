@@ -1,6 +1,6 @@
 package com.ch.repository;
 
-import com.ch.domain.Course;
+import com.ch.domain.course.Course;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package com.ch.controller.admin;
 
-import com.ch.domain.EducationFeedback;
+import com.ch.domain.feedback.EducationFeedback;
 import com.ch.service.EducationFeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

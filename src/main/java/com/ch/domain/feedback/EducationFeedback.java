@@ -1,11 +1,9 @@
-package com.ch.domain;
+package com.ch.domain.feedback;
 
+import com.ch.domain.course.Course;
 import lombok.Data;
-import lombok.Getter;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 

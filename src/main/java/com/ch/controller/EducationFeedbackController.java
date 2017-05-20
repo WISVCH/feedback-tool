@@ -1,6 +1,6 @@
 package com.ch.controller;
 
-import com.ch.domain.EducationFeedback;
+import com.ch.domain.feedback.EducationFeedback;
 import com.ch.service.CourseService;
 import com.ch.service.EducationFeedbackService;
 import com.ch.service.NotificationService;

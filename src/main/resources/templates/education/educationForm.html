@@ -33,7 +33,7 @@
 				<div class="col-md-10">
 					<select class="form-control" th:field="*{feedbackType}">
 						<option value="">Select Type</option>
-						<option th:each="type : ${T(com.ch.domain.FeedbackType).values()}"
+						<option th:each="type : ${T(com.ch.domain.feedback.FeedbackType).values()}"
 								th:value="${type}"
 								th:text="${type}">Select type
 						</option>

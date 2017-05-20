@@ -19,7 +19,7 @@ address {
 	margin-top:20px;
 }
 
-tr:hover td {
+.table-striped tr:hover td {
     background:#e5e5e5;
 }
 

@@ -25,20 +25,35 @@
 			<div class="form-group">
 		    	<label class="col-sm-2 control-label">Program</label>
 		    	<div class="col-md-10">
-		    		<p class="form-control-static" th:text="${course.program}">program</p>
+		    		<p class="form-control-static" th:text="${course.programEnum}">program</p>
 		    	</div>
 		  	</div>
-		  	<div class="form-group">
-		    	<label class="col-sm-2 control-label">Instructor</label>
-		    	<div class="col-md-10">
-		    		<p class="form-control-static" th:text="${course.instructorName}">instructor name</p>
-		    	</div>
-		  	</div>
+		  	<!--<div class="form-group">-->
+		    	<!--<label class="col-sm-2 control-label">Instructor</label>-->
+		    	<!--<div class="col-md-10">-->
+		    		<!--<p class="form-control-static" th:each="instructor : ${course.instructors}" th:text="${instructor.name}">instructor name </p>-->
+					<!--<span style="display:inline-block;"><a class="form-control-static" th:each="instructor : ${course.instructors}" th:text="${instructor.mail}"-->
+																																																		   <!--th:href="'mailto:' + ${instructor.mail} + '?Subject=Feedback regarding ' + ${course.courseCode}">instructor mail</a></span>-->
+		    	<!--</div>-->
+		  	<!--</div>-->
+			<!--<div class="form-group">-->
+				<!--<label class="col-sm-2 control-label">Instructor Mail</label>-->
+				<!--<div class="col-md-10">-->
+					<!--<a class="form-control-static" th:each="instructor : ${course.instructors}" th:text="${instructor.mail}"-->
+					   <!--th:href="'mailto:' + ${instructor.mail} + '?Subject=Feedback regarding ' + ${course.courseCode}">instructor mail</a>-->
+				<!--</div>-->
+			<!--</div>-->
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Instructor Mail</label>
+				<label class="col-sm-2 control-label">Instructor</label>
 				<div class="col-md-10">
-					<a class="form-control-static" th:text="${course.instructorMail}"
-					   th:href="'mailto:' + ${course.instructorMail} + '?Subject=Feedback regarding ' + ${course.courseCode}">instructor mail</a>
+					<table >
+						<tbody>
+						<tr th:each="instructor : ${course.instructors}">
+							<td th:text="${instructor.name} + '&emsp;'">name</td>
+							<td><a href="#" th:href="'mailto:' + ${instructor.mail} + '?Subject=Feedback regarding ' + ${course.courseCode}" th:text="${instructor.mail}">mail</a></td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</form>

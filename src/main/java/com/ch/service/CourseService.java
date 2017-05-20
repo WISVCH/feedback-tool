@@ -1,6 +1,6 @@
 package com.ch.service;
 
-import com.ch.domain.Course;
+import com.ch.domain.course.Course;
 import com.ch.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +34,14 @@ public class CourseService {
 
     public Course get(String courseCode) {
         return courseRepository.findAllByCourseCodeIs(courseCode);
+    }
+
+    public void delete(String courseCode) {
+        Course course = this.get(courseCode);
+        courseRepository.delete(course);
+    }
+
+    public boolean exists(String courseCode) {
+        return this.get(courseCode) != null;
     }
 }

@@ -1,6 +1,6 @@
 package com.ch.controller;
 
-import com.ch.domain.AssociationFeedback;
+import com.ch.domain.feedback.AssociationFeedback;
 import com.ch.service.AssociationFeedbackService;
 import com.ch.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;

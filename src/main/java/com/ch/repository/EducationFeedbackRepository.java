@@ -1,6 +1,6 @@
 package com.ch.repository;
 
-import com.ch.domain.EducationFeedback;
+import com.ch.domain.feedback.EducationFeedback;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

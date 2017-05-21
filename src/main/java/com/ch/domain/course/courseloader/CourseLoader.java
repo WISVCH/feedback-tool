@@ -23,7 +23,8 @@ public class CourseLoader {
         this.courseService = courseService;
     }
 
-    public void load(String courses) {
+    public void load(String courses) throws Exception{
+        courses = courses.toUpperCase();
         List<String> courseList = Arrays.asList(courses.split("\\s*,\\s*"));
         for (String course : courseList) {
             this.courseBuilder.build(course);

@@ -9,12 +9,14 @@ import com.ch.service.EducationFeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -53,16 +55,13 @@ public class AdminCourseController {
     }
 
     @RequestMapping("/settings/load")
-    public String load(@ModelAttribute("courses") CoursesString courses, RedirectAttributes redirectAttributes) {
-        courseLoader.load(courses.getCourseLoadList());
-        redirectAttributes.addFlashAttribute("message", "The course(s) are uploaded to the system!");
-        return "redirect:/admin/course/settings";
-    }
-
-    @RequestMapping("/settings/delete")
-    public String delete(@ModelAttribute("courses") CoursesString courses, RedirectAttributes redirectAttributes) {
-        courseService.delete(courses.getCourseDeleteList());
-        redirectAttributes.addFlashAttribute("message", "The course(s) are deleted from the system!");
+    public String load(@Valid @ModelAttribute("courses") CoursesString courses, RedirectAttributes redirectAttributes) {
+        try {
+            courseLoader.load(courses.getCourseLoadList());
+            redirectAttributes.addFlashAttribute("successMessage", "The course(s) are uploaded to the system!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong uploading the course(s), please check if your input is valid.");
+        }
         return "redirect:/admin/course/settings";
     }
 }

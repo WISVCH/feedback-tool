@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Build and save a course.
  * Not the cleanest code due to the far from ideal TU API.
- *
+ * <p>
  * Created by Tom on 20/05/2017.
  */
 @Component
@@ -44,41 +44,37 @@ public class CourseBuilder {
     /**
      * Build and save a course given the course code.
      *
-     * @param courseCode    The course code of the course that needs to be build.
+     * @param courseCode The course code of the course that needs to be build.
      */
-    protected void build(String courseCode) {
-        try {
-            // Get and create the course.
-            JSONObject courseJSON = new JSONObject(this.getCourseFromAPI(courseCode)).getJSONObject("vak");
-            Course course = new Course();
-            courseInstructors = new ArrayList<>();
-            // Set the course code, name and program.
-            course.setCourseCode(courseJSON.getString("cursusid"));
-            course.setName(courseJSON.getString("langenaamEN"));
-            course.setProgramEnum(courseJSON.getJSONObject("opleiding").getString("code"));
-
-            // Get and save the instructor(s).
-            this.saveInstructor(courseJSON.getJSONObject("extraUnsupportedInfo")
-                    .getJSONArray("vakMedewerkers")
-                    .getJSONObject(0)
-                    .get("medewerker"));
-            course.setInstructors(courseInstructors);
-
-            // Save the course.
-            if (courseService.exists(course.getCourseCode())){
-                courseService.delete(course.getCourseCode());
-            }
-            courseService.save(course);
-
-        } catch (Exception e) {
-            System.out.println("Something went wrong loading the courses: " + e.getMessage());
+    protected void build(String courseCode) throws Exception {
+        // Get and create the course.
+        JSONObject courseJSON = new JSONObject(this.getCourseFromAPI(courseCode)).getJSONObject("vak");
+        Course course = new Course();
+        // Update if course already exists.
+        if (courseService.exists(courseCode)) {
+            course = courseService.get(courseCode);
         }
+        // Set the course code, name and program.
+        course.setCourseCode(courseJSON.getString("cursusid"));
+        course.setName(courseJSON.getString("langenaamEN"));
+        course.setProgramEnum(courseJSON.getJSONObject("opleiding").getString("code"));
+
+        // Get and save the instructor(s).
+        courseInstructors = new ArrayList<>();
+        this.saveInstructor(courseJSON.getJSONObject("extraUnsupportedInfo")
+                .getJSONArray("vakMedewerkers")
+                .getJSONObject(0)
+                .get("medewerker"));
+        course.setInstructors(courseInstructors);
+
+        // Save the course.
+        courseService.save(course);
     }
 
     /**
      * Retrieve the course from the TU API.
      *
-     * @param courseCode    The course that is retrieved.
+     * @param courseCode The course that is retrieved.
      * @return course       The course as a string.
      */
     private String getCourseFromAPI(String courseCode) {
@@ -99,14 +95,14 @@ public class CourseBuilder {
      * Get and save the course instructor(s).
      *
      * @param instructorsObject The instructor(s).
-     * @throws Exception        When the format is invalid.
+     * @throws Exception When the format is invalid.
      */
     private void saveInstructor(Object instructorsObject) throws Exception {
         // One instructor.
         if (instructorsObject instanceof JSONObject) {
             JSONObject instructorJSON = (JSONObject) instructorsObject;
             this.saveOneInstructor(instructorJSON);
-        // Multiple instructors.
+            // Multiple instructors.
         } else if (instructorsObject instanceof JSONArray) {
             JSONArray instructorsJSON = (JSONArray) instructorsObject;
             this.saveMultipleInstructors(instructorsJSON);
@@ -116,8 +112,8 @@ public class CourseBuilder {
     /**
      * Save one instructor.
      *
-     * @param instructorJSON    The instructor that is saved.
-     * @throws Exception        When the saving goes wrong.
+     * @param instructorJSON The instructor that is saved.
+     * @throws Exception When the saving goes wrong.
      */
     private void saveOneInstructor(JSONObject instructorJSON) throws Exception {
         String instructorName = instructorJSON.getString("naam");
@@ -136,8 +132,8 @@ public class CourseBuilder {
     /**
      * Save multiple instructors.
      *
-     * @param instructorsJSON   The instructors that are saved.
-     * @throws Exception        When the saving goes wrong.
+     * @param instructorsJSON The instructors that are saved.
+     * @throws Exception When the saving goes wrong.
      */
     private void saveMultipleInstructors(JSONArray instructorsJSON) throws Exception {
         for (int i = 0; i < instructorsJSON.length(); i++) {

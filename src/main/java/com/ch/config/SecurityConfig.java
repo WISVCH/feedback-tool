@@ -1,39 +1,39 @@
 //package com.ch.config;
 //
-//        import ch.wisv.connect.client.CHUserInfoFetcher;
-//        import ch.wisv.connect.common.model.CHUserInfo;
-//        import com.google.common.collect.ImmutableSet;
-//        import com.nimbusds.jose.JWSAlgorithm;
-//        import org.mitre.oauth2.model.ClientDetailsEntity;
-//        import org.mitre.oauth2.model.RegisteredClient;
-//        import org.mitre.openid.connect.client.OIDCAuthenticationFilter;
-//        import org.mitre.openid.connect.client.OIDCAuthenticationProvider;
-//        import org.mitre.openid.connect.client.service.ClientConfigurationService;
-//        import org.mitre.openid.connect.client.service.RegisteredClientService;
-//        import org.mitre.openid.connect.client.service.ServerConfigurationService;
-//        import org.mitre.openid.connect.client.service.impl.*;
-//        import org.mitre.openid.connect.web.UserInfoInterceptor;
-//        import org.springframework.beans.factory.annotation.Autowired;
-//        import org.springframework.beans.factory.annotation.Value;
-//        import org.springframework.boot.autoconfigure.security.SecurityProperties;
-//        import org.springframework.context.annotation.Bean;
-//        import org.springframework.context.annotation.Configuration;
-//        import org.springframework.core.annotation.Order;
-//        import org.springframework.security.authentication.AuthenticationProvider;
-//        import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//        import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-//        import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//        import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//        import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//        import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//        import org.springframework.security.web.AuthenticationEntryPoint;
-//        import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
-//        import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
-//        import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-//        import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+//import ch.wisv.connect.client.CHUserInfoFetcher;
+//import ch.wisv.connect.common.model.CHUserInfo;
+//import com.google.common.collect.ImmutableSet;
+//import com.nimbusds.jose.JWSAlgorithm;
+//import org.mitre.oauth2.model.ClientDetailsEntity;
+//import org.mitre.oauth2.model.RegisteredClient;
+//import org.mitre.openid.connect.client.OIDCAuthenticationFilter;
+//import org.mitre.openid.connect.client.OIDCAuthenticationProvider;
+//import org.mitre.openid.connect.client.service.ClientConfigurationService;
+//import org.mitre.openid.connect.client.service.RegisteredClientService;
+//import org.mitre.openid.connect.client.service.ServerConfigurationService;
+//import org.mitre.openid.connect.client.service.impl.*;
+//import org.mitre.openid.connect.web.UserInfoInterceptor;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.boot.autoconfigure.security.SecurityProperties;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.core.annotation.Order;
+//import org.springframework.security.authentication.AuthenticationProvider;
+//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+//import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.web.AuthenticationEntryPoint;
+//import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+//import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
+//import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 //
-//        import java.util.Collections;
-//        import java.util.Set;
+//import java.util.Collections;
+//import java.util.Set;
 //
 ///**
 // * Should be replaced with CH Connect
@@ -64,7 +64,7 @@
 //    /**
 //     * Groups that are admin in the system
 //     */
-//    @Value("#{'${events.admin.groups}'.split(',')}")
+//    @Value("#{'${fbt.admin.groups}'.split(',')}")
 //    private Set<String> adminGroups;
 //
 //    /**
@@ -78,10 +78,6 @@
 //                .and()
 //                .logout()
 //                .logoutSuccessUrl("/")
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//				.anyRequest().permitAll()
 //        ;
 //    }
 //
@@ -180,8 +176,8 @@
 //    @Bean
 //    public ClientConfigurationService clientConfigurationService() {
 //        RegisteredClient client = new RegisteredClient();
-//        client.setClientName("Events Development");
-//        client.setScope(ImmutableSet.of("openid", "email", "phone", "profile", "ldap"));
+//        client.setClientName("FeedbackTool Development");
+//        client.setScope(ImmutableSet.of("openid", "email", "profile", "ldap"));
 //        client.setTokenEndpointAuthMethod(ClientDetailsEntity.AuthMethod.SECRET_BASIC);
 //        client.setRedirectUris(Collections.singleton(clientUri + loginPath));
 //        client.setRequestObjectSigningAlg(JWSAlgorithm.RS256);

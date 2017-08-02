@@ -12,6 +12,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * Controller for error handling.
+ */
 @Controller
 public class GlobalErrorController implements ErrorController {
 

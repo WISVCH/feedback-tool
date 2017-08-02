@@ -7,6 +7,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+/**
+ * Configuration for security.
+ * Require admin role for each /admin/ url.
+ */
 @Configuration
 @EnableGlobalMethodSecurity( securedEnabled = true )
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)

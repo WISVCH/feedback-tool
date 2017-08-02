@@ -16,26 +16,39 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 /**
+ * Controller for association feedback.
+ *
  * Created by Tom on 30/04/2017.
  */
 @Controller
 @RequestMapping("/association")
 public class AssociationFeedbackController {
+    /** JPA service for association feedback. */
     private AssociationFeedbackService associationFeedbackService;
+    /** Service for mail notifications. */
     private NotificationService notificationService;
 
+    /**
+     * Autowired constructor.
+     */
     @Autowired
     public AssociationFeedbackController(AssociationFeedbackService associationFeedbackService, NotificationService notificationService) {
         this.associationFeedbackService = associationFeedbackService;
         this.notificationService = notificationService;
     }
 
+    /**
+     * Create new association feedback.
+     */
     @RequestMapping("/create")
     public String create(Model model) {
         model.addAttribute("feedback", new AssociationFeedback());
         return "association/associationForm";
     }
 
+    /**
+     * Save new association feedback.
+     */
     @Transactional
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("feedback") AssociationFeedback associationFeedback,

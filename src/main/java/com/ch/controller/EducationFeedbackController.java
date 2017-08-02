@@ -17,15 +17,23 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 /**
+ * Controller for education feedback.
+ *
  * Created by Tom on 29/04/2017.
  */
 @Controller
 @RequestMapping("/education")
 public class EducationFeedbackController {
+    /** JPA service for education feedback. */
     private EducationFeedbackService educationFeedbackService;
+    /** JPA service for courses. */
     private CourseService courseService;
+    /** Service for mail notifications. */
     private NotificationService notificationService;
 
+    /**
+     * Autowired constructor.
+     */
     @Autowired
     public EducationFeedbackController(EducationFeedbackService educationFeedbackService, CourseService courseService, NotificationService notificationService) {
         this.educationFeedbackService = educationFeedbackService;
@@ -33,6 +41,9 @@ public class EducationFeedbackController {
         this.notificationService = notificationService;
     }
 
+    /**
+     * Create new education feedback.
+     */
     @RequestMapping("/create")
     public String create(Model model) {
         model.addAttribute("feedback", new EducationFeedback());
@@ -40,6 +51,9 @@ public class EducationFeedbackController {
         return "education/educationForm";
     }
 
+    /**
+     * Save new education feedback.
+     */
     @Transactional
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("feedback") EducationFeedback educationFeedback,

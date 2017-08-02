@@ -20,15 +20,23 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
+ * Controller for courses.
+ *
  * Created by Tom on 30/04/2017.
  */
 @Controller
 @RequestMapping("/admin/course")
 public class AdminCourseController {
+    /** JPA service for courses. */
     private CourseService courseService;
+    /** JPA service for education feedback. */
     private EducationFeedbackService educationFeedbackService;
+    /** Loader for courses. */
     private CourseLoader courseLoader;
 
+    /**
+     * Autowired constructor.
+     */
     @Autowired
     public AdminCourseController(CourseService courseService, EducationFeedbackService educationFeedbackService, CourseLoader courseLoader) {
         this.courseService = courseService;
@@ -36,6 +44,9 @@ public class AdminCourseController {
         this.courseLoader = courseLoader;
     }
 
+    /**
+     * View single course item by it's course code.
+     */
     @RequestMapping("/{courseCode}")
     public String getCourse(@PathVariable String courseCode, Model model) {
         courseCode = courseCode.toUpperCase();
@@ -48,12 +59,18 @@ public class AdminCourseController {
         return "admin/course/view";
     }
 
+    /**
+     * Settings for courses.
+     */
     @RequestMapping("/settings")
     public String settings(Model model) {
         model.addAttribute("courses", new CoursesString());
         return "admin/course/settings";
     }
 
+    /**
+     * Load courses into the system.
+     */
     @RequestMapping("/settings/load")
     public String load(@Valid @ModelAttribute("courses") CoursesString courses, RedirectAttributes redirectAttributes) {
         try {

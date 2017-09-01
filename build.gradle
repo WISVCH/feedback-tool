@@ -46,10 +46,12 @@ dependencies {
     compile 'org.thymeleaf:thymeleaf'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 
-    compile('ch.wisv:wisvch-connect-client:1.2.6.0') {
+    compile('ch.wisv:wisvch-connect-client:1.2.6.3') {
         // Workaround for https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server/pull/1084
         exclude module: 'bcprov-jdk15on'
     }
+
+    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
     compile 'org.bouncycastle:bcprov-jdk15on:1.52+'
 
     compile 'com.zaxxer:HikariCP'

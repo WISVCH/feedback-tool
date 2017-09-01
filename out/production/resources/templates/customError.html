@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org"
+	  layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Something went wrong...</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		
+		<h2>Oops! Something went wrong...</h2>
+		
+		<p>The following error message came up: <span th:text="${error}">error message</span>. <br/>
+			Go back and try again, or see the table below for a more detailed error description.</p>
+
+		<br/><br/>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Key</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>TimeStamp</td>
+					<td th:text="${timestamp}"></td>
+				</tr>
+				<tr>
+					<td>Status</td>
+					<td th:text="${status}"></td>
+				</tr>
+				<tr>
+					<td>Message</td>
+					<td th:text="${error}"></td>
+				</tr>
+				<tr>
+					<td>Path</td>
+					<td th:text="${path}"></td>
+				</tr>																
+			</tbody>
+		</table>
+	
+	</div>
+
+</body>
+</html>

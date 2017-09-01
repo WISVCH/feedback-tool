@@ -1,0 +1,32 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.ch.service.NotificationService",
+      "name": "mailNotifications",
+      "type": "com.ch.service.NotificationService"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.ch.service.NotificationService",
+      "name": "mailNotifications.from",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.ch.service.NotificationService",
+      "name": "mailNotifications.to-association",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.ch.service.NotificationService",
+      "name": "mailNotifications.to-education-a-m",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.ch.service.NotificationService",
+      "name": "mailNotifications.to-education-c-s",
+      "type": "java.lang.String"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Settings</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <h2>Settings</h2>
+    Fill in as a comma separated list of course codes.
+    <br/> <br/>
+
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}">message</p>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-warning" role="alert">
+        <p th:text="${errorMessage}">message</p>
+    </div>
+
+    <form class="form-horizontal" th:object="${courses}" th:action="@{/admin/course/settings/load}" method="post">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Load/update courses</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{courseLoadList}"
+                       placeholder="(e.g. TI1206, TI3306, TW3510)"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Load courses</button>
+    </form>
+
+    <br/><br/><br/>
+
+</div>
+
+</body>
+</html>

@@ -64,6 +64,9 @@ dependencies {
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 
+    compile 'org.webjars:bootstrap:3.3.7-1'
+    compile 'org.webjars.bower:wisvch-bootstrap-theme:0.0.3'
+
 }
 
 eclipse {

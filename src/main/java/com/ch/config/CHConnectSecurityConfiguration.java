@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -40,8 +41,11 @@ import static org.mitre.openid.connect.client.OIDCAuthenticationFilter.FILTER_PR
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-public class CHConnectSecurityConfiguration extends WebSecurityConfigurerAdapter{
+@Profile("!test")
+public class CHConnectSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     private final CHConnectConfiguration properties;
+
     private final ClientConfigurationService clientConfigurationService;
 
     public CHConnectSecurityConfiguration(CHConnectConfiguration properties, ClientConfigurationService clientConfigurationService) {
@@ -54,25 +58,15 @@ public class CHConnectSecurityConfiguration extends WebSecurityConfigurerAdapter
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //@formatter:off
-        http.
-                addFilterBefore(oidcAuthenticationFilter(), AbstractPreAuthenticatedProcessingFilter.class)
+        http.addFilterBefore(oidcAuthenticationFilter(), AbstractPreAuthenticatedProcessingFilter.class)
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
                 .and()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-				.anyRequest().permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login?logout")
-                .permitAll()
-                .and()
-                .csrf().disable();
-        //@formatter:on
+                .logoutSuccessUrl("/");
     }
 
     /**
@@ -152,6 +146,8 @@ public class CHConnectSecurityConfiguration extends WebSecurityConfigurerAdapter
         StaticSingleIssuerService issuer = new StaticSingleIssuerService();
         issuer.setIssuer(properties.getIssuerUri());
         oidcFilter.setIssuerService(issuer);
+
+        // TODO: for production, sign or encrypt requests
         oidcFilter.setAuthRequestUrlBuilder(new PlainAuthRequestUrlBuilder());
 
         return oidcFilter;

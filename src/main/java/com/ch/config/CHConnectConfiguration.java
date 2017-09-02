@@ -14,14 +14,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
+
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
+
 import static org.mitre.openid.connect.client.OIDCAuthenticationFilter.FILTER_PROCESSES_URL;
 
 @Component
 @ConfigurationProperties(prefix = "wisvch.connect")
 @Validated
+@Profile("!test")
 public class CHConnectConfiguration {
 
     /**
@@ -99,9 +102,9 @@ public class CHConnectConfiguration {
      * @return ClientConfigurationService
      */
     @Bean
-    @Profile("!prod")
+    @Profile("!production")
     public ClientConfigurationService clientConfigurationService() {
-        RegisteredClientService registeredClientService = new JsonFileRegisteredClientService("config/oidc-client-registration.json");
+        RegisteredClientService registeredClientService = new JsonFileRegisteredClientService("src/main/java/com/ch/config/oidc-client-registration.json");
 
         DynamicRegistrationClientConfigurationService clientConfigurationService = new
                 DynamicRegistrationClientConfigurationService();
@@ -117,10 +120,11 @@ public class CHConnectConfiguration {
      * @return ClientConfigurationService with a single statically configured client
      */
     @Bean
-    @Profile("prod")
+    @Profile("production")
     public ClientConfigurationService clientProdConfigurationService() {
         StaticClientConfigurationService clientConfigurationService = new StaticClientConfigurationService();
         clientConfigurationService.setClients(Collections.singletonMap(issuerUri, getRegisteredClient()));
+
         return clientConfigurationService;
     }
 }

@@ -25,6 +25,7 @@
 						<option value="">Select Course</option>
 						<option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.courseCode + ' ' + course.name}">Courses</option>
 					</select>
+					<span>Your course not in the list? Please click <a href="#" th:href="'mailto:education@ch.tudelft.nl' + '?Subject=Course missing in FeedbackTool'">here</a> to let us know!</span>
 					<span th:if="${#fields.hasErrors('course')}" th:errors="*{course}" th:class="help-block">Course Errors</span>
 				</div>
 			</div>

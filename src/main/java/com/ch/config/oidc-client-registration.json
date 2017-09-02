@@ -1,0 +1,24 @@
+{
+  "https://connect.ch.tudelft.nl/": {
+    "client_id": "bcc38bf2-322a-4f6f-9fc8-f92c7c453890",
+    "client_secret": "AORr5XQ9z8W9R8BsSRwguU8yOXV7NsQLAH47SYHvy0tTRnB3h18v5GEQ698OZP91lQfm-zqvr9rLHrM4WNpm9sE",
+    "client_secret_expires_at": 0,
+    "client_id_issued_at": 1504345601,
+    "registration_access_token": "eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJhdWQiOiJiY2MzOGJmMi0zMjJhLTRmNmYtOWZjOC1mOTJjN2M0NTM4OTAiLCJpc3MiOiJodHRwczpcL1wvY29ubmVjdC5jaC50dWRlbGZ0Lm5sXC8iLCJpYXQiOjE1MDQzNDU2MDEsImp0aSI6IjVmZTg5ODdiLTM4ZTItNDg3Mi04ODBiLTAxYjk3MWIwNjk2NiJ9.MGKfSObvMW6jQa2eI1rBc2c213TDf51iL5g9dT2OPIF2SFdwkjNNBQvhxk5WSdsMkjU27GRcpUM0JMQsROhyCmAAEj5vwjF0BNpPkpd-Xz45L6x9qHikOaOLY3T6qzlwilrGhgGB0nOkK3DlFD8zPEiWsxC2Y9D2lMvIo8DWx_hHZPZcb0n7RSxzW7emdVvykkZfkWx7Z40Rlmq_RAerePBtaMvq1OfUZI-kF9m_QeN7klVOKXyzZElZ7f6zkCiOFwvn-wOgD6D4c3XnimjQTzndlym6Lq7z6zXNnCXpuQo8HzCp-FOyn6uB0niTr6KI4j61aOKDZWANQZJUSVZaOw",
+    "registration_client_uri": "https://connect.ch.tudelft.nl/register/bcc38bf2-322a-4f6f-9fc8-f92c7c453890",
+    "redirect_uris": [
+      "http://localhost:9000//openid_connect_login"
+    ],
+    "token_endpoint_auth_method": "client_secret_basic",
+    "scope": "ldap openid email profile offline_access",
+    "grant_types": [
+      "refresh_token",
+      "authorization_code"
+    ],
+    "response_types": [
+      "code"
+    ],
+    "jwks_uri": "https://connect.ch.tudelft.nl//jwk",
+    "request_object_signing_alg": "RS256"
+  }
+}

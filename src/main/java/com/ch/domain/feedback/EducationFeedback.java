@@ -14,9 +14,11 @@ import javax.validation.constraints.NotNull;
 @Data
 public class EducationFeedback extends Feedback{
 
-    @NotNull
     @ManyToOne
     private Course course;
+
+    @NotNull
+    private String courseCode;
 
     public EducationFeedback() {
         super();

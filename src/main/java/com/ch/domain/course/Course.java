@@ -14,9 +14,7 @@ import java.util.List;
 @Entity
 @Data
 public class Course {
-    @Id @GeneratedValue
-    private long id;
-
+    @Id
     @NotEmpty
     @Column(unique = true)
     private String courseCode;
@@ -66,5 +64,10 @@ public class Course {
                 this.programEnum = ProgramEnum.MScES;
                 break;
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.courseCode + ' ' + this.name;
     }
 }

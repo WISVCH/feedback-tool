@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Entity
 public class Instructor {
-//
+
     @Id @GeneratedValue
     private long id;
 

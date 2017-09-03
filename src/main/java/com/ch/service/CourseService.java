@@ -28,10 +28,6 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Course get(long id) {
-        return courseRepository.findOne(id);
-    }
-
     public Course get(String courseCode) {
         return courseRepository.findAllByCourseCodeIs(courseCode);
     }

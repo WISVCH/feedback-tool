@@ -51,7 +51,7 @@ public class AdminCourseController {
     public String getCourse(@PathVariable String courseCode, Model model) {
         courseCode = courseCode.toUpperCase();
         Course course = courseService.get(courseCode);
-        List<EducationFeedback> feedbackOnCourse = educationFeedbackService.getCourseFeedback(course.getId());
+        List<EducationFeedback> feedbackOnCourse = educationFeedbackService.getCourseFeedback(course.getCourseCode());
         model.addAttribute("course", course);
         model.addAttribute("feedbackOnCourse", feedbackOnCourse);
         model.addAttribute("link", "admin/education/");

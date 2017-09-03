@@ -67,4 +67,9 @@ public class Course {
                 break;
         }
     }
+
+    @Override
+    public String toString() {
+        return this.courseCode + ' ' + this.name;
+    }
 }

@@ -15,5 +15,5 @@ public interface EducationFeedbackRepository extends CrudRepository<EducationFee
 
     List<EducationFeedback> findAllByHandledIsFalseOrderByPostedOnDesc();
 
-    List<EducationFeedback> findAllByCourseIdOrderByPostedOnDesc(long id);
+    List<EducationFeedback> findAllByCourseCourseCodeOrderByPostedOnDesc(String code);
 }

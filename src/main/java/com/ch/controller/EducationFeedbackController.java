@@ -1,5 +1,6 @@
 package com.ch.controller;
 
+import com.ch.domain.course.Course;
 import com.ch.domain.feedback.EducationFeedback;
 import com.ch.service.CourseService;
 import com.ch.service.EducationFeedbackService;
@@ -58,15 +59,22 @@ public class EducationFeedbackController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@Valid @ModelAttribute("feedback") EducationFeedback educationFeedback,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        Course course = courseService.get(educationFeedback.getCourseCode().toUpperCase());
+        if (course == null) {
+            model.addAttribute("courseCodeError", "");
+            model.addAttribute("courses", courseService.list());
+            return "education/educationForm";
+        }
         if(bindingResult.hasErrors()) {
             model.addAttribute("courses", courseService.list());
             return "education/educationForm";
-        } else {
-            educationFeedbackService.save(educationFeedback);
-            notificationService.sendNotifications(educationFeedback);
-            redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +
-                    " If you filled in your email, you will find a copy of your feedback in your mail.");
-            return "redirect:/education/create";
         }
+
+        educationFeedback.setCourse(course);
+        educationFeedbackService.save(educationFeedback);
+        notificationService.sendNotifications(educationFeedback);
+        redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +
+                " If you filled in your email, you will find a copy of your feedback in your mail.");
+        return "redirect:/education/create";
     }
 }

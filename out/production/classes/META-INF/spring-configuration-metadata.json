@@ -7,6 +7,11 @@
       "type": "com.ch.service.NotificationService"
     },
     {
+      "sourceType": "com.ch.service.MailContentBuilder",
+      "name": "wisvch.connect",
+      "type": "com.ch.service.MailContentBuilder"
+    },
+    {
       "sourceType": "com.ch.config.CHConnectConfiguration",
       "name": "wisvch.connect",
       "type": "com.ch.config.CHConnectConfiguration"
@@ -38,6 +43,11 @@
       "name": "wisvch.connect.admin-groups",
       "description": "Groups that are admin in the system",
       "type": "java.util.List<java.lang.String>"
+    },
+    {
+      "sourceType": "com.ch.service.MailContentBuilder",
+      "name": "wisvch.connect.client-uri",
+      "type": "java.lang.String"
     },
     {
       "sourceType": "com.ch.config.CHConnectConfiguration",

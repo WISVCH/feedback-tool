@@ -2,7 +2,10 @@ package com.ch.service;
 
 import com.ch.domain.feedback.AssociationFeedback;
 import com.ch.domain.feedback.EducationFeedback;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -11,11 +14,14 @@ import org.thymeleaf.context.Context;
  * Created by Tom on 06/05/2017.
  */
 @Service
+@ConfigurationProperties(prefix = "wisvch.connect")
 public class MailContentBuilder {
     private TemplateEngine templateEngine;
 
-    @Autowired
+    @Setter @Getter
+    private String clientUri;
 
+    @Autowired
     public MailContentBuilder(TemplateEngine templateEngine) {
         this.templateEngine = templateEngine;
     }
@@ -23,12 +29,14 @@ public class MailContentBuilder {
     public String buildEducationAdmin(EducationFeedback educationFeedback) {
         Context context = new Context();
         context.setVariable("feedback", educationFeedback);
+        context.setVariable("clientUri", this.clientUri);
         return templateEngine.process("admin/mail/educationAdminMail", context);
     }
 
     public String buildAssociationAdmin(AssociationFeedback associationFeedback) {
         Context context = new Context();
         context.setVariable("feedback", associationFeedback);
+        context.setVariable("clientUri", this.clientUri);
         return templateEngine.process("admin/mail/associationAdminMail", context);
     }
 

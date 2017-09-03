@@ -27,5 +27,6 @@ nbdist/
 .nb-gradle/
 
 *.properties
+!src/main/resources/example-properties.properties
 
 src/main/java/com/ch/config/**.json

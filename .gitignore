@@ -29,7 +29,7 @@ out/
 
 *.properties
 !src/main/resources/example-properties.properties
-
+!gradle-wrapper.properties
 
 .gradle/
 config/

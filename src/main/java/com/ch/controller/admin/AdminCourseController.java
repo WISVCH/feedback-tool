@@ -77,7 +77,7 @@ public class AdminCourseController {
             courseLoader.load(courses.getCourseLoadList());
             redirectAttributes.addFlashAttribute("successMessage", "The course(s) are uploaded to the system!");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong uploading the course(s), please check if your input is valid.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong uploading the course(s), please check if your input is valid. If you entered a list of codes, check the database for the last code that did not fail to see where the error occurred. Courses from other faculties or service courses can't be added.");
         }
         return "redirect:/admin/course/settings";
     }

@@ -31,13 +31,13 @@
 		<nav class="navbar navbar-default">
 		    <div class="container-fluid">
                 <div class="navbar-header">
-                    <a href="/"><img class="navbar-brand" href="/" th:src="@{/img/Logo.png}" /></a>
-                    <a class="navbar-brand" href="/">FeedbackTool</a>
+                    <a href="/"><img class="navbar-brand" th:href="@{/}" th:src="@{/img/Logo.png}" /></a>
+                    <a class="navbar-brand" th:href="@{/}">FeedbackTool</a>
 		        </div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				    <ul class="nav navbar-nav">
-				        <li th:class="${controllerName == 'EducationFeedback'} ? 'active'"><a href="/education/create">Education</a></li>
-						<li th:class="${controllerName == 'AssociationFeedback'} ? 'active'"><a href="/association/create">Association</a></li>
+				        <li th:class="${controllerName == 'EducationFeedback'} ? 'active'"><a th:href="@{/education/create}">Education</a></li>
+						<li th:class="${controllerName == 'AssociationFeedback'} ? 'active'"><a th:href="@{/association/create}">Association</a></li>
 						<!--<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'">-->
 							<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>-->
 							<!--<ul class="dropdown-menu">-->
@@ -50,9 +50,9 @@
 						<li class="dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
 				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Feedback <span class="caret"></span></a>
 				            <ul class="dropdown-menu">
-								<li><a href="/admin/education/inbox">Inbox</a></li>
-								<li><a href="/admin/education/archive">Archive</a></li>
-								<li><a href="/admin/course/settings">Settings</a></li>
+								<li><a th:href="@{/admin/education/inbox}">Inbox</a></li>
+								<li><a th:href="@{/admin/education/archive}">Archive</a></li>
+								<li><a th:href="@{/admin/course/settings}">Settings</a></li>
 				            </ul>
 				        </li>
 				    </ul>

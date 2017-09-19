@@ -9,5 +9,6 @@ public enum ProgramEnum {
     MScCS,
     MScAM,
     MScES,
-    MScCE
+    MScCE,
+    ServiceEducation
 }

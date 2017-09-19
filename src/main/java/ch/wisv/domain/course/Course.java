@@ -63,6 +63,9 @@ public class Course {
             case "MSc ES" :
                 this.programEnum = ProgramEnum.MScES;
                 break;
+            case "EWI keuzevakken  service-onderwijs" :
+                this.programEnum = ProgramEnum.ServiceEducation;
+                break;
         }
     }
 

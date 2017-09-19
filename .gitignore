@@ -33,4 +33,5 @@ out/
 
 .gradle/
 config/
-src/main/java/com/ch/config/**.json
+!src/main/java/ch/wisv/config/
+src/main/java/ch/wisv/config/**.json

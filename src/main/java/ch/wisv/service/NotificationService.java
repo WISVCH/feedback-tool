@@ -23,6 +23,8 @@ public class NotificationService {
 	@Getter @Setter
 	private String toEducationCS;
 	@Getter @Setter
+	private String toEducation;
+	@Getter @Setter
 	private String toEducationAM;
 	@Getter @Setter
 	private String toAssociation;
@@ -69,6 +71,8 @@ public class NotificationService {
 				ProgramEnum programEnum = ((EducationFeedback) feedback).getCourse().getProgramEnum();
 				if (programEnum.equals(ProgramEnum.BScTW) || programEnum.equals(ProgramEnum.MScAM)) {
 					mail.addRecipients(Message.RecipientType.TO, toEducationAM);
+				} else if(programEnum.equals(ProgramEnum.ServiceEducation)) {
+					mail.addRecipients(Message.RecipientType.TO, toEducation);
 				} else {
 					mail.addRecipients(Message.RecipientType.TO, toEducationCS);
 				}

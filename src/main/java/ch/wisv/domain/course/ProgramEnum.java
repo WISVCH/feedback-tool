@@ -1,4 +1,4 @@
-package com.ch.domain.course;
+package ch.wisv.domain.course;
 
 /**
  * Created by Tom on 29/04/2017.

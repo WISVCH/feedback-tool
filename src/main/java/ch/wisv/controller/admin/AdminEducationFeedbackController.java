@@ -1,9 +1,8 @@
-package com.ch.controller.admin;
+package ch.wisv.controller.admin;
 
-import com.ch.domain.feedback.EducationFeedback;
-import com.ch.service.EducationFeedbackService;
+import ch.wisv.domain.feedback.EducationFeedback;
+import ch.wisv.service.EducationFeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;

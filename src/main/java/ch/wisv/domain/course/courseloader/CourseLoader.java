@@ -1,10 +1,9 @@
-package com.ch.domain.course.courseloader;
+package ch.wisv.domain.course.courseloader;
 
-import com.ch.service.CourseService;
+import ch.wisv.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 

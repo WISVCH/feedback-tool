@@ -1,4 +1,4 @@
-package com.ch.domain.feedback;
+package ch.wisv.domain.feedback;
 
 /**
  * Created by Tom on 29/04/2017.

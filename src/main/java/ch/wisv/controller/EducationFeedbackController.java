@@ -1,10 +1,10 @@
-package com.ch.controller;
+package ch.wisv.controller;
 
-import com.ch.domain.course.Course;
-import com.ch.domain.feedback.EducationFeedback;
-import com.ch.service.CourseService;
-import com.ch.service.EducationFeedbackService;
-import com.ch.service.NotificationService;
+import ch.wisv.domain.course.Course;
+import ch.wisv.domain.feedback.EducationFeedback;
+import ch.wisv.service.CourseService;
+import ch.wisv.service.EducationFeedbackService;
+import ch.wisv.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

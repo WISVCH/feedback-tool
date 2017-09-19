@@ -1,7 +1,7 @@
-package com.ch.service;
+package ch.wisv.service;
 
-import com.ch.domain.feedback.AssociationFeedback;
-import com.ch.repository.AssociationFeedbackRepository;
+import ch.wisv.repository.AssociationFeedbackRepository;
+import ch.wisv.domain.feedback.AssociationFeedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

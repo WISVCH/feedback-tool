@@ -1,7 +1,7 @@
-package com.ch.controller.admin;
+package ch.wisv.controller.admin;
 
-import com.ch.domain.feedback.AssociationFeedback;
-import com.ch.service.AssociationFeedbackService;
+import ch.wisv.service.AssociationFeedbackService;
+import ch.wisv.domain.feedback.AssociationFeedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

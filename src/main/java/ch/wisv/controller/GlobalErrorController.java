@@ -1,4 +1,4 @@
-package com.ch.controller;
+package ch.wisv.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;

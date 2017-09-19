@@ -1,7 +1,7 @@
-package com.ch.service;
+package ch.wisv.service;
 
-import com.ch.domain.feedback.EducationFeedback;
-import com.ch.repository.EducationFeedbackRepository;
+import ch.wisv.domain.feedback.EducationFeedback;
+import ch.wisv.repository.EducationFeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

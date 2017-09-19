@@ -1,6 +1,6 @@
-package com.ch.domain.feedback;
+package ch.wisv.domain.feedback;
 
-import com.ch.domain.course.Course;
+import ch.wisv.domain.course.Course;
 import lombok.Data;
 
 import javax.persistence.Entity;

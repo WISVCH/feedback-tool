@@ -1,4 +1,4 @@
-package com.ch.domain.feedback;
+package ch.wisv.domain.feedback;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;

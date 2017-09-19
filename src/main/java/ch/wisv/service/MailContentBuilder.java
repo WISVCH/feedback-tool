@@ -1,7 +1,7 @@
-package com.ch.service;
+package ch.wisv.service;
 
-import com.ch.domain.feedback.AssociationFeedback;
-import com.ch.domain.feedback.EducationFeedback;
+import ch.wisv.domain.feedback.AssociationFeedback;
+import ch.wisv.domain.feedback.EducationFeedback;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

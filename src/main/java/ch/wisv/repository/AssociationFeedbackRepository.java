@@ -1,6 +1,6 @@
-package com.ch.repository;
+package ch.wisv.repository;
 
-import com.ch.domain.feedback.AssociationFeedback;
+import ch.wisv.domain.feedback.AssociationFeedback;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

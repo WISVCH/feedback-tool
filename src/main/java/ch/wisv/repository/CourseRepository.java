@@ -1,6 +1,6 @@
-package com.ch.repository;
+package ch.wisv.repository;
 
-import com.ch.domain.course.Course;
+import ch.wisv.domain.course.Course;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

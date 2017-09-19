@@ -1,4 +1,4 @@
-package com.ch.domain.course;
+package ch.wisv.domain.course;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;

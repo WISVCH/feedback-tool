@@ -1,7 +1,7 @@
-package com.ch.service;
+package ch.wisv.service;
 
-import com.ch.domain.course.Instructor;
-import com.ch.repository.InstructorRepository;
+import ch.wisv.domain.course.Instructor;
+import ch.wisv.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

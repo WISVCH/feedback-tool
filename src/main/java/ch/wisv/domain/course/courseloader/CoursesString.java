@@ -1,4 +1,4 @@
-package com.ch.domain.course.courseloader;
+package ch.wisv.domain.course.courseloader;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

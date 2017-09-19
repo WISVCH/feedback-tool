@@ -1,19 +1,17 @@
-package com.ch.controller.admin;
+package ch.wisv.controller.admin;
 
-import com.ch.domain.course.Course;
-import com.ch.domain.course.courseloader.CourseLoader;
-import com.ch.domain.course.courseloader.CoursesString;
-import com.ch.domain.feedback.EducationFeedback;
-import com.ch.service.CourseService;
-import com.ch.service.EducationFeedbackService;
+import ch.wisv.domain.course.Course;
+import ch.wisv.domain.course.courseloader.CoursesString;
+import ch.wisv.domain.feedback.EducationFeedback;
+import ch.wisv.service.CourseService;
+import ch.wisv.domain.course.courseloader.CourseLoader;
+import ch.wisv.service.EducationFeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;

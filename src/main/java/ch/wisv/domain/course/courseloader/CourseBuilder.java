@@ -1,9 +1,9 @@
-package com.ch.domain.course.courseloader;
+package ch.wisv.domain.course.courseloader;
 
-import com.ch.domain.course.Course;
-import com.ch.domain.course.Instructor;
-import com.ch.service.CourseService;
-import com.ch.service.InstructorService;
+import ch.wisv.domain.course.Course;
+import ch.wisv.service.CourseService;
+import ch.wisv.domain.course.Instructor;
+import ch.wisv.service.InstructorService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

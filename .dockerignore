@@ -1,2 +1,3 @@
-**
-!build/libs/feedbacktool.jar
+build
+.idea
+.gradle

@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.9.RELEASE'
+        springBootVersion = '1.5.10.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -55,6 +55,7 @@ dependencies {
     compile 'com.zaxxer:HikariCP'
     compile 'org.projectlombok:lombok:1.16.10'
     compile 'com.fasterxml.jackson.core:jackson-databind'
+    compile 'org.json:json'
 
     runtime 'org.postgresql:postgresql'
     runtime 'com.h2database:h2'

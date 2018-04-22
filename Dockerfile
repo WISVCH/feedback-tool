@@ -5,5 +5,4 @@ RUN ./gradlew build
 
 FROM wisvch/spring-boot-base:1
 COPY --from=builder /src/build/libs/feedback-tool.jar /srv/feedback-tool.jar
-USER spring-boot
 CMD ["/srv/feedback-tool.jar"]

@@ -31,7 +31,7 @@ public class NotificationService {
 
 	private JavaMailSender javaMailSender;
 	private MailContentBuilder mailContentBuilder;
-	
+
 	@Autowired
 	public NotificationService(JavaMailSender javaMailSender, MailContentBuilder mailContentBuilder){
 		this.javaMailSender = javaMailSender;
@@ -66,6 +66,12 @@ public class NotificationService {
 		try {
 			MimeMessage mail = javaMailSender.createMimeMessage();
 			mail.setFrom(from);
+			if (!feedback.getSenderMail().equals("")) {
+				mail.setReplyTo(new javax.mail.Address[]
+						{
+								new javax.mail.internet.InternetAddress(feedback.getSenderMail())
+						});
+			}
 			mail.setSubject("[CH FeedbackTool] New feedback available");
 			if (feedback instanceof EducationFeedback) {
 				ProgramEnum programEnum = ((EducationFeedback) feedback).getCourse().getProgramEnum();

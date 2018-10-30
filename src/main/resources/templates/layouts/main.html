@@ -1,77 +1,125 @@
 <!DOCTYPE html>
 <html lang="en"
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
-	  xmlns:layout="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>FeedbackTool Main Layout</title>
-	
-	<link rel="stylesheet" href="../../static/css/FeedbackTool.css" th:href="@{/css/FeedbackTool.css}"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../static/css/awesomplete.css" th:href="@{/css/awesomplete.css}" />
-		
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />	
+
+    <link rel="icon" href="https://ch.tudelft.nl/wp-content/themes/rechallenge/assets/images/favicon.png"/>
+
+    <link rel="stylesheet" th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/node_modules/themestrap/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/node_modules/awesomplete/awesomplete.css}"/>
+    <link rel="stylesheet" th:href="@{/css/wisvch-default.css}"/>
+    <link rel="stylesheet" th:href="@{/css/wisvch-header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/wisvch-feedbacktool.css}"/>
+    <link rel="stylesheet" th:href="@{/node_modules/@fortawesome/fontawesome-free/css/all.min.css}"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
 	<link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css' />
-
-    <script src="../../static/js/awesomplete.js" th:src="@{/js/awesomplete.js}"></script>
-
-
-	<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
 </head>
 <body>
+<header class="page-header">
 
-	<div class="container">
-  		 
-		<nav class="navbar navbar-default">
-		    <div class="container-fluid">
-                <div class="navbar-header">
-                    <a th:href="@{/}"><img class="navbar-brand" th:href="@{/}" th:src="@{/img/Logo.png}" /></a>
-                    <a class="navbar-brand" th:href="@{/}">FeedbackTool</a>
-		        </div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				    <ul class="nav navbar-nav">
-				        <li th:class="${controllerName == 'EducationFeedback'} ? 'active'"><a th:href="@{/education/create}">Education</a></li>
-						<li th:class="${controllerName == 'AssociationFeedback'} ? 'active'"><a th:href="@{/association/create}">Association</a></li>
-						<!--<li class="dropdown" th:class="${controllerName.startsWith('Admin')} ? 'dropdown active' : 'dropdown'">-->
-							<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>-->
-							<!--<ul class="dropdown-menu">-->
-								<!--<li><a href="/admin/education/inbox">Education Inbox</a></li>-->
-								<!--<li><a href="/admin/education/archive">Education Archive</a></li>-->
-								<!--<li><a href="/admin/association/inbox">Association Inbox</a></li>-->
-								<!--<li><a href="/admin/association/archive">Association Archive</a></li>-->
-							<!--</ul>-->
-						<!--</li>-->
-						<li class="dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Feedback <span class="caret"></span></a>
-				            <ul class="dropdown-menu">
-								<li><a th:href="@{/admin/education/inbox}">Inbox</a></li>
-								<li><a th:href="@{/admin/education/archive}">Archive</a></li>
-								<li><a th:href="@{/admin/course/settings}">Settings</a></li>
-				            </ul>
-				        </li>
-				    </ul>
-				    <div class="navbar-text navbar-right">
-				    	<form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
-				    		<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
-				    	</form>
-				    	<a sec:authorize="!isAuthenticated()" th:href="@{/openid_connect_login}"> Login</a>
-				    </div>
-				</div>
-		    </div>
-		</nav>
-		
-		<div layout:fragment="content">
-		</div>
-	
-	</div>
+    <!-- Top Bar -->
+    <div class="wisv-header header-left">
+        <nav class="navbar navbar-expand-lg navbar-light wisv-header-bg">
+            <a class="logo" href="https://ch.tudelft.nl/">
+                <img src="https://ch.tudelft.nl/wp-content/themes/rechallenge/assets/images/ch-logo.png"
+                     alt="W.I.S.V. 'Christiaan Huygens'" style="position: absolute; top: 10px;"/>
+            </a>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
+            <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item m-2">
+                        <a href="" class="btn btn-block btn-secondary">
+                            Login
+                        </a>
+                    </li>
+                    <!--<li class="nav-item m-2" th:if="${customer != null}">-->
+                    <!--<a th:href="@{/overview/}" class="btn btn-block btn-primary">-->
+                    <!--My Events-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item m-2" th:if="${customer != null}">-->
+                    <!--<a th:href="@{/logout}" class="btn btn-block btn-secondary">-->
+                    <!--logout-->
+                    <!--<span th:text="${customer.getName()}" th:if="${customer != null}"></span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item m-2" th:if="${customer == null}">-->
+                    <!--<a th:href="@{/overview/}" class="btn btn-block btn-secondary">-->
+                    <!--login-->
+                    <!--</a>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    <!-- Page title -->
+    <div class="page-title feedback-title dotted-border">
+        <div class="row">
+            <div class="col">
+                <h1>Feedback tool</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <main class="col py-3" layout:fragment="content"></main>
+    </div>
+</div>
+
+<!--<div class="container">-->
+
+<!--<nav class="navbar navbar-default">-->
+<!--<div class="container-fluid">-->
+<!--<div class="navbar-header">-->
+<!--<a th:href="@{/}"><img class="navbar-brand" th:href="@{/}" th:src="@{/img/Logo.png}" /></a>-->
+<!--<a class="navbar-brand" th:href="@{/}">FeedbackTool</a>-->
+<!--</div>-->
+<!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+<!--<ul class="nav navbar-nav">-->
+<!--<li th:class="${controllerName == 'EducationFeedback'} ? 'active'"><a th:href="@{/education/create}">Education</a></li>-->
+<!--<li th:class="${controllerName == 'AssociationFeedback'} ? 'active'"><a th:href="@{/association/create}">Association</a></li>-->
+<!--<li class="dropdown" sec:authorize="hasRole('ROLE_ADMIN')">-->
+<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Feedback <span class="caret"></span></a>-->
+<!--<ul class="dropdown-menu">-->
+<!--<li><a th:href="@{/admin/education/inbox}">Inbox</a></li>-->
+<!--<li><a th:href="@{/admin/education/archive}">Archive</a></li>-->
+<!--<li><a th:href="@{/admin/course/settings}">Settings</a></li>-->
+<!--</ul>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<div class="navbar-text navbar-right">-->
+<!--<form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">-->
+<!--<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>-->
+<!--</form>-->
+<!--<a sec:authorize="!isAuthenticated()" th:href="@{/openid_connect_login}"> Login</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</nav>-->
+
+
+<!--</div>-->
+
+<script th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/node_modules/awesomplete/awesomplete.min.js}"></script>
 </body>
 </html>

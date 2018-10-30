@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html lang="en"
 	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+	  layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>CH FeedbackTool</title>
 </head>
 <body>
 		
 	<div layout:fragment="content">
-		
 		<div class="row">
-			<div class="col-md-12" style="text-align: center;">
-				<h4>Do you want to give feedback on education or association?</h4>
-				<a th:href="@{/education/create}" class="btn btn-default">Education</a>
-				<a th:href="@{/association/create}" class="btn btn-default">Association</a>
+			<div class="col text-center my-4">
+				<h4 class="display-4">Do you want to give feedback on education or association?</h4>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col">
+				<a th:href="@{/education/create}" class="btn btn-block p-0">
+					<div class="card text-white bg-secondary">
+						<div class="card-body text-center py-5">
+							<i class="display-1 fas fa-graduation-cap my-4"></i>
+							<h1 class="display-4 text-white">education</h1>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col">
+				<a th:href="@{/education/create}" class="btn btn-block p-0">
+					<div class="card text-white bg-info">
+						<div class="card-body text-center py-5">
+							<i class="display-1 fas fa-coffee my-4"></i>
+							<h1 class="display-4 text-white">association</h1>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<!--<div class="" style="text-align: center;">-->
+		<!--<h4>Do you want to give feedback on education or association?</h4>-->
+		<!--<a th:href="@{/education/create}" class="btn btn-default">Education</a>-->
+		<!--<a th:href="@{/association/create}" class="btn btn-default">Association</a>-->
+		<!--</div>-->
+		<!--</div>-->
 		
 	</div>
 		

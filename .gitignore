@@ -36,3 +36,5 @@ config/
 !src/main/java/ch/wisv/config/
 src/main/java/ch/wisv/config/**.json
 src/main/java/ch/wisv/config/oidc-client-registration.json
+yarn.lock
+node_modules/

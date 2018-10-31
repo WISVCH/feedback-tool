@@ -249,3 +249,9 @@ body.menu-open .page-header {
     background: url("../img/dotted-border.png") center top repeat-x;
     background-size: 23px auto;
 }
+
+.navbar-light .navbar-toggler {
+    color: #fff;
+    background-color: #ec2222;
+    border-color: #eb1616;
+}

@@ -294,6 +294,12 @@ h1 .badge-danger, .btn-danger {
     border-color: #ef4545 !important;
 }
 
+.btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+    background: rgba(255, 255, 255, 0.75) !important;
+    color: #ef4545 !important;
+    border-color: #ef4545 !important;
+}
+
 h1 .badge-info, .btn-info {
     border-color: #058cce;
     background-color: #058cce;

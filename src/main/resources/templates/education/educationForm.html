@@ -69,7 +69,7 @@
                         <div class="col-12 col-md-9">
                             <input type="text" class="form-control" th:field="*{subject}"
                                    th:value="${feedback.getSubject()}"
-                                   th:classappend="${#fields.hasErrors('body')} ? 'is-invalid'"
+                                   th:classappend="${#fields.hasErrors('subject')} ? 'is-invalid'"
                                    placeholder="Short description of your feedback"/>
                             <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"
                                   class="invalid-feedback">Subject Errors</span>

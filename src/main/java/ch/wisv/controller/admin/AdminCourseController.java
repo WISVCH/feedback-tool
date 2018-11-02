@@ -1,21 +1,14 @@
 package ch.wisv.controller.admin;
 
-import ch.wisv.domain.course.Course;
-import ch.wisv.domain.course.courseloader.CoursesString;
-import ch.wisv.domain.feedback.EducationFeedback;
-import ch.wisv.service.CourseService;
 import ch.wisv.domain.course.courseloader.CourseLoader;
-import ch.wisv.service.EducationFeedbackService;
+import ch.wisv.domain.course.courseloader.CoursesString;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
-import java.util.List;
 
 /**
  * Controller for courses.
@@ -23,12 +16,9 @@ import java.util.List;
  * Created by Tom on 30/04/2017.
  */
 @Controller
-@RequestMapping("/admin/course")
+@RequestMapping("/admin")
 public class AdminCourseController {
-    /** JPA service for courses. */
-    private CourseService courseService;
-    /** JPA service for education feedback. */
-    private EducationFeedbackService educationFeedbackService;
+
     /** Loader for courses. */
     private CourseLoader courseLoader;
 
@@ -36,25 +26,8 @@ public class AdminCourseController {
      * Autowired constructor.
      */
     @Autowired
-    public AdminCourseController(CourseService courseService, EducationFeedbackService educationFeedbackService, CourseLoader courseLoader) {
-        this.courseService = courseService;
-        this.educationFeedbackService = educationFeedbackService;
+    public AdminCourseController(CourseLoader courseLoader) {
         this.courseLoader = courseLoader;
-    }
-
-    /**
-     * View single course item by it's course code.
-     */
-    @RequestMapping("/{courseCode}")
-    public String getCourse(@PathVariable String courseCode, Model model) {
-        courseCode = courseCode.toUpperCase();
-        Course course = courseService.get(courseCode);
-        List<EducationFeedback> feedbackOnCourse = educationFeedbackService.getCourseFeedback(course.getCourseCode());
-        model.addAttribute("course", course);
-        model.addAttribute("feedbackOnCourse", feedbackOnCourse);
-        model.addAttribute("link", "admin/education/");
-
-        return "admin/course/view";
     }
 
     /**
@@ -63,6 +36,7 @@ public class AdminCourseController {
     @RequestMapping("/settings")
     public String settings(Model model) {
         model.addAttribute("courses", new CoursesString());
+
         return "admin/course/settings";
     }
 

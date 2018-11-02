@@ -48,18 +48,9 @@
                 </div>
             </div>
             <div class="col-5">
-                <div class="card">
+                <div class="card mb-3">
                     <h5 class="card-header">Details</h5>
                     <div class="card-body">
-                        <div class="row mb-3">
-                            <label class="col-3 control-label">Course code</label>
-                            <div class="col-9"
-                                 th:if="${feedback instanceof T(ch.wisv.domain.feedback.EducationFeedback)}">
-                                <a class="form-control-static" th:text="${feedback.course.courseCode}"
-                                   th:href="@{'/admin/course/' + ${feedback.course.courseCode}}">course code</a>
-                            </div>
-                        </div>
-
                         <div class="row">
                             <label class="col-3 control-label">Type</label>
                             <div class="col-9">
@@ -94,6 +85,38 @@
                                 <a class="form-control-static" th:text="${feedback.senderMail}"
                                    th:href="'mailto:' + ${feedback.senderMail} + '?Subject=Reaction%20feedback: ' + ${feedback.subject}">sender
                                     mail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" th:if="${feedback instanceof T(ch.wisv.domain.feedback.EducationFeedback)}">
+                    <h5 class="card-header">Course</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <label class="col-3 control-label">Course</label>
+                            <div class="col-9" th:text="${feedback.course.name}"></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-3 control-label">Course code</label>
+                            <div class="col-9" th:text="${feedback.course.courseCode}"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-3 control-label">Program</label>
+                            <div class="col-9" th:text="${feedback.course.programEnum}"></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-3 control-label">Instructors</label>
+                            <div class="col-9">
+                                <table>
+                                    <tbody>
+                                    <tr th:each="instructor : ${feedback.course.instructors}">
+                                        <td th:text="${instructor.name} + '&emsp;'">name</td>
+                                        <td><a href="#"
+                                               th:href="'mailto:' + ${instructor.mail} + '?Subject=Feedback regarding ' + ${feedback.course.courseCode}"
+                                               th:text="${instructor.mail}">mail</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

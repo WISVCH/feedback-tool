@@ -3,6 +3,8 @@ package ch.wisv.controller;
 import ch.wisv.domain.feedback.AssociationFeedback;
 import ch.wisv.service.AssociationFeedbackService;
 import ch.wisv.service.NotificationService;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 /**
  * Controller for association feedback.
@@ -45,6 +43,7 @@ public class AssociationFeedbackController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("feedback", new AssociationFeedback());
+
         return "association/associationForm";
     }
 
@@ -53,15 +52,22 @@ public class AssociationFeedbackController {
      */
     @Transactional
     @PostMapping(value = "/create")
-    public String save(@Valid @ModelAttribute("feedback") AssociationFeedback associationFeedback,
-                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String save(
+            @Valid @ModelAttribute("feedback") AssociationFeedback associationFeedback,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            Model model
+    ) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("feedback", associationFeedback);
+
             return "association/associationForm";
         } else {
             associationFeedbackService.save(associationFeedback);
             notificationService.sendNotifications(associationFeedback);
             redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +
                     " If you filled in your email, you will find a copy of your feedback in your mail.");
+
             return "redirect:/association/create";
         }
     }

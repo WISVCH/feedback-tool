@@ -189,8 +189,7 @@ select.form-control {
 }
 
 .form-control.is-invalid:not(:focus) {
-    border-width: 2px;
-    border-style: solid;
+    border: 2px solid #ef4545 !important;
 }
 
 .form-control:disabled, .form-control[readonly], input[readonly] {

@@ -25,36 +25,34 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
                 <form class="form" th:object="${feedback}" th:action="@{/association/create}" method="post">
-                    <div class="form-group row" th:classappend="${#fields.hasErrors('feedbackType')}? 'has-error'">
+                    <div class="form-group row">
                         <label class="col-12 col-md-3 control-label">Type <span class="required">*</span></label>
                         <div class="col-12 col-md-9">
                             <select class="form-control" th:field="*{feedbackType}"
                                     th:classappend="${#fields.hasErrors('feedbackType')} ? 'is-invalid'">
-                                <option value="">Select Type</option>
+                                <option value="" class="text-muted">-- Select Type --</option>
                                 <!--/*@thymesVar id="type" type="ch.wisv.domain.feedback.FeedbackType"*/-->
                                 <option th:each="type : ${T(ch.wisv.domain.feedback.FeedbackType).values()}"
                                         th:value="${type}"
                                         th:text="${type}">Select type
                                 </option>
                             </select>
-                            <span th:if="${#fields.hasErrors('feedbackType')}" th:errors="*{feedbackType}"
-                                  class="invalid-feedback">Type Errors</span>
+                            <span th:errors="*{feedbackType}" class="invalid-feedback">Type Errors</span>
                         </div>
                     </div>
 
-                    <div class="form-group row" th:classappend="${#fields.hasErrors('subject')}? 'has-error'">
+                    <div class="form-group row">
                         <label class="col-12 col-md-3 control-label">Subject <span class="required">*</span></label>
                         <div class="col-12 col-md-9">
                             <input type="text" class="form-control" th:field="*{subject}"
                                    th:value="${feedback.getSubject()}"
                                    th:classappend="${#fields.hasErrors('subject')} ? 'is-invalid'"
                                    placeholder="Short description of your feedback"/>
-                            <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"
-                                  class="invalid-feedback">Subject Errors</span>
+                            <span th:errors="*{subject}" class="invalid-feedback">Subject Errors</span>
                         </div>
                     </div>
 
-                    <div class="form-group row" th:classappend="${#fields.hasErrors('body')}? 'has-error'">
+                    <div class="form-group row">
                         <label class="col-12 col-md-3 control-label">Feedback <span class="required">*</span></label>
                         <div class="col-12 col-md-9">
 							<textarea class="form-control" rows="7" placeholder="Tell us all about it!"
@@ -80,10 +78,8 @@
                                    placeholder="(Optional) Your email"
                                    th:value="${feedback.getSenderMail()}"
                                    th:classappend="${#fields.hasErrors('senderMail')} ? 'is-invalid'"/>
-                            <span th:if="${#fields.hasErrors('senderMail')}" th:errors="*{senderMail}"
-                                  class="invalid-feedback">
-                                Sender Mail Errors
-                            </span>
+
+                            <span th:errors="*{senderMail}" class="invalid-feedback">Sender Mail Errors</span>
                             <small class="help-text text-muted">
                                 Fill in your email to receive a copy of your feedback
                             </small>

@@ -18,13 +18,13 @@ public abstract class Feedback {
     @Id @GeneratedValue
     long id;
 
-    @NotNull
+    @NotNull(message = "Please select a feedback type")
     FeedbackType feedbackType;
 
-    @NotEmpty
+    @NotEmpty(message = "Subject cannot be empty")
     String subject;
 
-    @NotEmpty
+    @NotEmpty(message = "Feedback description cannot be empty")
     @Column(columnDefinition = "TEXT")
     String body;
 
@@ -37,7 +37,7 @@ public abstract class Feedback {
 
     String senderName;
 
-    @Email
+    @Email(message = "This is not a valid email address")
     String senderMail;
 
     Feedback() {

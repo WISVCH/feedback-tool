@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Repository
 public interface AssociationFeedbackRepository extends CrudRepository<AssociationFeedback, Long> {
-    List<AssociationFeedback> findAllByOrderByPostedOnDesc();
+    List<AssociationFeedback> findAllByHandledIsTrueOrderByPostedOnDesc();
 
     List<AssociationFeedback> findAllByHandledIsFalseOrderByPostedOnDesc();
 }

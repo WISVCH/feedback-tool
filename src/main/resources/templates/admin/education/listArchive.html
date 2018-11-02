@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
+      layout:decorator="layouts/admin" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Feedback Archive</title>
 </head>
 <body>
 
 <div layout:fragment="content">
-
-    <h2>Feedback Archive</h2>
-    <h3>Education | <a th:href="@{/admin/association/archive}">Association</a></h3>
-
     <div th:if="${message}" class="alert alert-success" role="alert">
         <p th:text="${message}">success message</p>
     </div>
 
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-striped" id="archiveTables">
+        <thead class="thead-inverse bg-primary">
         <tr>
             <th>Posted On</th>
             <th>Course</th>
@@ -31,17 +27,28 @@
             <td th:text="${#calendars.format(post.postedOn,'dd/MM/yyyy HH:mm:ss')}">posted on</td>
             <td th:text="${post.course.courseCode}  + ' ' + ${post.course.name}">course code</td>
             <td th:text="${post.subject}">subject</td>
-            <td th:text="${post.feedbackType}">feedback type</td>
-            <td><a href="#" th:href="@{/admin/education/handle/} + ${post.id}" th:text="${post.handled}">handled</a></td>
+            <td>
+                <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Positive}"
+                   class="fas fa-smile fa-fw text-success"></i>
+                <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Negative}"
+                   class="fas fa-frown fa-fw text-danger"></i>
+                <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Suggestion}"
+                   class="fas fa-meh fa-fw text-warning"></i>
+                <span th:text="${post.feedbackType}"></span>
+            </td>
+            <td class="text-right">
+                <a class="btn btn-sm btn-danger"
+                   th:href="@{/admin/education/handle/} + ${post.id}">unhandle</a>
+            </td>
         </tr>
         </tbody>
     </table>
-
-    <p th:if="${posts.size() == 0}">
-    <div class="alert alert-warning" role="alert">No Posts Found.</div>
-    </p>
-
 </div>
 
+<script layout:fragment="script">
+    $(document).ready(function () {
+        $("#archiveTables").DataTable();
+    });
+</script>
 </body>
 </html>

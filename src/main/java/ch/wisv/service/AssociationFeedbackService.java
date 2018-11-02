@@ -29,7 +29,7 @@ public class AssociationFeedbackService {
     }
 
     public List<AssociationFeedback> listArchive() {
-        return associationFeedbackRepository.findAllByOrderByPostedOnDesc();
+        return associationFeedbackRepository.findAllByHandledIsTrueOrderByPostedOnDesc();
     }
 
     public AssociationFeedback get(long id) {

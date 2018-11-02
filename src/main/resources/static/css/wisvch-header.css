@@ -39,6 +39,10 @@ body.menu-open .page-header {
     }
 }
 
+.wisv-header .navbar {
+    min-height: 68px;
+}
+
 .wisv-header .container-fluid .row {
     height: 4.75rem;
 }

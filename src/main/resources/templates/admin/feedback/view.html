@@ -10,8 +10,8 @@
 	<div layout:fragment="content">
         <div class="row mb-4">
             <div class="col">
-                <a class="btn btn-light" th:href="@{/admin/association/inbox}">
-                    <i class="fas fa-fw fa-arrow-left"></i> Back To Feedback Inbox
+                <a class="btn btn-info" th:href="${redirect}">
+                    <i class="fas fa-fw fa-arrow-left"></i> Back
                 </a>
             </div>
         </div>
@@ -36,11 +36,11 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <a th:if="${!feedback.handled}" th:href="@{/admin/association/handle/} + ${feedback.id}"
+                        <a th:if="${!feedback.handled}" th:href="@{/admin/handle/} + ${feedback.key}"
                            class="btn btn-block btn-info">
                             <i class="fas fa-archive"></i> Archive
                         </a>
-                        <a th:if="${feedback.handled}" th:href="@{/admin/association/handle/} + ${feedback.id}"
+                        <a th:if="${feedback.handled}" th:href="@{/admin/handle/} + ${feedback.key}"
                            class="btn btn-block btn-info">
                             <i class="fas fa-archive"></i> Unarchive
                         </a>
@@ -51,6 +51,15 @@
                 <div class="card">
                     <h5 class="card-header">Details</h5>
                     <div class="card-body">
+                        <div class="row mb-3">
+                            <label class="col-3 control-label">Course code</label>
+                            <div class="col-9"
+                                 th:if="${feedback instanceof T(ch.wisv.domain.feedback.EducationFeedback)}">
+                                <a class="form-control-static" th:text="${feedback.course.courseCode}"
+                                   th:href="@{'/admin/course/' + ${feedback.course.courseCode}}">course code</a>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <label class="col-3 control-label">Type</label>
                             <div class="col-9">
@@ -63,10 +72,16 @@
                                 <span th:text="${feedback.feedbackType}"></span>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row">
                             <label class="col-3 control-label">Posted on</label>
                             <div class="col-9"
                                  th:text="${#calendars.format(feedback.postedOn, 'dd/MM/yyyy hh:mm:ss')}"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-3 control-label">Handled on</label>
+                            <div class="col-9"
+                                 th:if="${feedback.handledOn != null}"
+                                 th:text="${#calendars.format(feedback.handledOn, 'dd/MM/yyyy hh:mm:ss')}"></div>
                         </div>
 
                         <div class="row">

@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="layouts/admin" xmlns:layout="http://www.w3.org/1999/xhtml">
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/admin">
 <head>
-    <title>Feedback Archive</title>
+    <title>CH Feedback Tool | Inbox</title>
 </head>
 <body>
-
 <div layout:fragment="content">
     <div th:if="${message}" class="alert alert-success" role="alert">
         <p th:text="${message}">success message</p>
     </div>
 
-    <table class="table table-striped" id="archiveTables">
+    <table class="table table-striped" id="inboxTables">
         <thead class="thead-inverse bg-primary">
         <tr>
             <th>Posted On</th>
-            <th>Course</th>
             <th>Subject</th>
+            <th>Course code</th>
             <th>Type</th>
             <th>Handled</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="post : ${posts}" th:onclick="'document.location=' + ${post.id}" style="cursor:pointer">
+        <tr th:each="post : ${posts}" th:attr="data-key=${post.getKey()}">
             <td th:text="${#calendars.format(post.postedOn,'dd/MM/yyyy HH:mm:ss')}">posted on</td>
-            <td th:text="${post.course.courseCode}  + ' ' + ${post.course.name}">course code</td>
             <td th:text="${post.subject}">subject</td>
+            <td>
+                <span th:if="${post instanceof T(ch.wisv.domain.feedback.EducationFeedback)}"
+                      th:text="${post.courseCode}">
+                </span>
+            </td>
             <td>
                 <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Positive}"
                    class="fas fa-smile fa-fw text-success"></i>
@@ -37,17 +41,34 @@
                 <span th:text="${post.feedbackType}"></span>
             </td>
             <td class="text-right">
-                <a class="btn btn-sm btn-danger"
-                   th:href="@{/admin/education/handle/} + ${post.id}">unhandle</a>
+                <a class="btn btn-sm btn-info" th:href="@{'/admin/handle/' + ${post.key}}">
+                    <i class="fas fa-archive"></i> Archive
+                </a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<script layout:fragment="script">
+<script layout:fragment="script" th:inline="javascript">
     $(document).ready(function () {
-        $("#archiveTables").DataTable();
+        var inboxTables = $("#inboxTables");
+        inboxTables.DataTable({
+            pageLength: 100,
+            ordering: false,
+            columns: [
+                {"width": "15%"},
+                {"width": "50%"},
+                null,
+                null,
+                {"width": "80px"}
+            ]
+        });
+
+        inboxTables.find('tbody').on('click', 'tr td:not(:last-child)', function () {
+            /*[+ var link = [[@{/admin/view/}]] + $(this).parent().data('key'); +]*/
+            document.location = link;
+        });
     });
 </script>
 </body>

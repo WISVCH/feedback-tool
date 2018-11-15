@@ -27,9 +27,10 @@
             <td th:text="${#calendars.format(post.postedOn,'dd/MM/yyyy HH:mm:ss')}">posted on</td>
             <td th:text="${post.subject}">subject</td>
             <td>
-                <span th:if="${post instanceof T(ch.wisv.domain.feedback.EducationFeedback)}"
-                      th:text="${post.courseCode}">
-                </span>
+                <a th:if="${post instanceof T(ch.wisv.domain.feedback.EducationFeedback)}"
+                   th:text="${post.courseCode}"
+                   th:href="@{'/admin/course/' + ${post.courseCode}}">
+                </a>
             </td>
             <td>
                 <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Positive}"

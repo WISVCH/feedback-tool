@@ -1,8 +1,13 @@
 package ch.wisv.controller.admin;
 
+import ch.wisv.domain.course.Course;
+import ch.wisv.domain.feedback.EducationFeedback;
 import ch.wisv.domain.feedback.Feedback;
+import ch.wisv.service.CourseService;
+import ch.wisv.service.EducationFeedbackService;
 import ch.wisv.service.FeedbackService;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +24,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminFeedbackController {
 
     /**
-     * FeedbackService.
+     * Autowired services.
      */
+    private final CourseService courseService;
+    private final EducationFeedbackService educationFeedbackService;
     private final FeedbackService feedbackService;
 
     @Autowired
-    public AdminFeedbackController(FeedbackService feedbackService) {
+    public AdminFeedbackController(CourseService courseService, EducationFeedbackService educationFeedbackService, FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
+        this.courseService = courseService;
+        this.educationFeedbackService = educationFeedbackService;
     }
 
     @GetMapping
@@ -38,6 +47,18 @@ public class AdminFeedbackController {
         model.addAttribute("posts", feedbackService.listInbox());
 
         return "admin/feedback/listInbox";
+    }
+
+    @GetMapping("/course/{courseCode}")
+    public String course(@PathVariable String courseCode, Model model) {
+        courseCode = courseCode.toUpperCase();
+        Course course = courseService.get(courseCode);
+        List<EducationFeedback> feedbackOnCourse = educationFeedbackService.getCourseFeedback(courseCode);
+
+        model.addAttribute("course", course);
+        model.addAttribute("feedbackOnCourse", feedbackOnCourse);
+
+        return "admin/feedback/listCourse";
     }
 
     @GetMapping("/archive")

@@ -30,6 +30,24 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
                 <form class="form" th:object="${feedback}" th:action="@{/education/create}" method="post">
+                    <div class="form-group row">
+                        <label class="col-12 col-md-3 control-label">Type <span class="required">*</span></label>
+                        <div class="col-12 col-md-9">
+                            <div class="row">
+                                <label th:each="type : ${T(ch.wisv.domain.feedback.FeedbackType).values()}"
+                                       class="col feedback-type">
+                                    <input type="radio" th:value="${type}" th:field="*{feedbackType}"
+                                           style="display: none;"/>
+                                    <div class="text-center" th:style="'color: ' + ${type.getColor()}">
+                                        <i class="far fa-fw fa-5x" th:classappend="${type.getEmoji()}"></i>
+                                        <p th:text="${type}"></p>
+                                    </div>
+                                </label>
+                            </div>
+                            <span th:errors="*{feedbackType}" class="d-block invalid-feedback">Type Errors</span>
+                        </div>
+                    </div>
+
                     <div class="form-group row" th:classappend="${#fields.hasErrors('courseCode')}? 'has-error'">
                         <label class="col-12 col-md-3 control-label">Course code<span class="required">*</span></label>
                         <div class="col-12 col-md-9">
@@ -42,21 +60,6 @@
                                 </option>
                             </datalist>
                             <span th:errors="*{courseCode}" class="invalid-feedback">Course Errors</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-12 col-md-3 control-label">Type <span class="required">*</span></label>
-                        <div class="col-12 col-md-9">
-                            <select class="form-control" th:field="*{feedbackType}"
-                                    th:classappend="${#fields.hasErrors('feedbackType')} ? 'is-invalid'">
-                                <option value="">Select Type</option>
-                                <option th:each="type : ${T(ch.wisv.domain.feedback.FeedbackType).values()}"
-                                        th:value="${type}"
-                                        th:text="${type}">Select type
-                                </option>
-                            </select>
-                            <span th:errors="*{feedbackType}" class="invalid-feedback">Type Errors</span>
                         </div>
                     </div>
 
@@ -115,4 +118,19 @@
         </div>
 	</div>
 </body>
+
+<script layout:fragment="script">
+    $(document).ready(function () {
+        $(".feedback-type").click(function (e) {
+            e.preventDefault();
+
+            $("i.fa-fw").each(function (index, element) {
+                $(element).addClass('far').removeClass('fas');
+            });
+
+            $(this).find("i").removeClass('far').addClass('fas');
+            $(this).find("input[type=radio]").prop("checked", true);
+        });
+    });
+</script>
 </html>

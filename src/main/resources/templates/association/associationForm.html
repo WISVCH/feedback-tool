@@ -26,16 +26,18 @@
                     <div class="form-group row">
                         <label class="col-12 col-md-3 control-label">Type <span class="required">*</span></label>
                         <div class="col-12 col-md-9">
-                            <select class="form-control" th:field="*{feedbackType}"
-                                    th:classappend="${#fields.hasErrors('feedbackType')} ? 'is-invalid'">
-                                <option value="" class="text-muted">-- Select Type --</option>
-                                <!--/*@thymesVar id="type" type="ch.wisv.domain.feedback.FeedbackType"*/-->
-                                <option th:each="type : ${T(ch.wisv.domain.feedback.FeedbackType).values()}"
-                                        th:value="${type}"
-                                        th:text="${type}">Select type
-                                </option>
-                            </select>
-                            <span th:errors="*{feedbackType}" class="invalid-feedback">Type Errors</span>
+                            <div class="row">
+                                <label th:each="type : ${T(ch.wisv.domain.feedback.FeedbackType).values()}"
+                                       class="col feedback-type">
+                                    <input type="radio" th:value="${type}" th:field="*{feedbackType}"
+                                           style="display: none;"/>
+                                    <div class="text-center" th:style="'color: ' + ${type.getColor()}">
+                                        <i class="far fa-fw fa-5x" th:classappend="${type.getEmoji()}"></i>
+                                        <p th:text="${type}"></p>
+                                    </div>
+                                </label>
+                            </div>
+                            <span th:errors="*{feedbackType}" class="d-block invalid-feedback">Type Errors</span>
                         </div>
                     </div>
 
@@ -94,4 +96,19 @@
 		</div>
 	</div>
 </body>
+
+<script layout:fragment="script">
+    $(document).ready(function () {
+        $(".feedback-type").click(function (e) {
+            e.preventDefault();
+
+            $("i.fa-fw").each(function (index, element) {
+                $(element).addClass('far').removeClass('fas');
+            });
+
+            $(this).find("i").removeClass('far').addClass('fas');
+            $(this).find("input[type=radio]").prop("checked", true);
+        });
+    });
+</script>
 </html>

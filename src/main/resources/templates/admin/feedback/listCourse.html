@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/admin">
+<head>
+    <title th:text="CH Feedback Tool | ${course.courseName}"></title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <p th:text="${message}">success message</p>
+    </div>
+
+    <table class="table table-striped" id="courseOverviewTable">
+        <thead class="thead-inverse bg-primary">
+        <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Instructors</th>
+            <th>Programme</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${course.courseCode}"></td>
+            <td th:text="${course.name}"></td>
+            <td>
+                <div th:each="instructor : ${course.instructors}">
+                    <span th:text="${instructor.name}"></span>
+                    (<a th:text="${instructor.mail}" th:href="'mailto:' + ${instructor.mail}"></a>)
+                </div>
+            </td>
+            <td th:text="${course.programEnum}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pt-5">
+        <table class="table table-striped" id="courseTables">
+            <thead class="thead-inverse bg-primary">
+            <tr>
+                <th>Posted On</th>
+                <th>Subject</th>
+                <th>Type</th>
+                <th>Handled</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${feedbackOnCourse}" th:attr="data-key=${post.getKey()}">
+                <td th:text="${#calendars.format(post.postedOn,'dd/MM/yyyy HH:mm:ss')}">posted on</td>
+                <td th:text="${post.subject}">subject</td>
+                <td>
+                    <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Positive}"
+                       class="fas fa-smile fa-fw text-success"></i>
+                    <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Negative}"
+                       class="fas fa-frown fa-fw text-danger"></i>
+                    <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Suggestion}"
+                       class="fas fa-meh fa-fw text-warning"></i>
+                    <span th:text="${post.feedbackType}"></span>
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-sm btn-info" th:href="@{'/admin/handle/' + ${post.key}}">
+                        <i class="fas fa-archive"></i> Archive
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    $(document).ready(function () {
+        var courseTables = $("#courseTables");
+        courseTables.DataTable({
+            pageLength: 100,
+            ordering: false,
+            columns: [
+                {"width": "15%"},
+                {"width": "60%"},
+                null,
+                {"width": "80px"}
+            ]
+        });
+
+        courseTables.find('tbody').on('click', 'tr td:not(:last-child)', function () {
+            /*[+ var link = [[@{/admin/view/}]] + $(this).parent().data('key'); +]*/
+            document.location = link;
+        });
+    });
+</script>
+</body>
+</html>

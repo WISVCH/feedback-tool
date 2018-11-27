@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<nav class="col-sm-3 col-md-2 d-none d-sm-block sidebar" th:fragment="sidebar">
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a th:href="@{/admin/inbox}" class="nav-link"
+               th:classappend="${#httpServletRequest.getRequestURI() == '/feedback/admin/inbox' ? 'active':''}">
+                <i class="fas fa-inbox fa-fw"></i> Inbox
+            </a>
+        </li>
+        <li class="nav-item">
+            <a th:href="@{/admin/archive}" class="nav-link"
+               th:classappend="${#httpServletRequest.getRequestURI() == '/feedback/admin/archive' ? 'active':''}">
+                <i class="fas fa-archive fa-fw"></i> Archive
+            </a>
+        </li>
+    </ul>
+
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a th:href="@{/admin/settings}" class="nav-link"
+               th:classappend="${#httpServletRequest.getRequestURI() == '/feedback/admin/settings' ? 'active':''}">
+                <i class="fas fa-fw fa-cogs"></i> Settings
+            </a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

@@ -1,18 +1,17 @@
 package ch.wisv.domain.feedback;
 
 import ch.wisv.domain.course.Course;
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 /**
- * Created by Tom on 28/04/2017.
+ * EducationFeedback.
  */
 @Entity
 @Data
-public class EducationFeedback extends Feedback{
+public class EducationFeedback extends Feedback {
 
     @ManyToOne
     private Course course;
@@ -24,18 +23,16 @@ public class EducationFeedback extends Feedback{
         super();
     }
 
-    @Override
-    public String toString() {
-        return "EducationFeedback{" +
-                "id=" + id +
-                ", course=" + course +
-                ", feedbackType=" + feedbackType +
-                ", subject='" + subject + '\'' +
-                ", body='" + body + '\'' +
-                ", postedOn=" + postedOn +
-                ", handled=" + handled +
-                ", senderName='" + senderName + '\'' +
-                ", senderMail='" + senderMail + '\'' +
-                '}';
+    public EducationFeedback(
+            Course course,
+            FeedbackType feedbackType,
+            String subject,
+            String body,
+            String senderName,
+            String senderMail
+    ) {
+        super(feedbackType, subject, body, senderName, senderMail);
+        this.course = course;
+        this.courseCode = course.getCourseCode();
     }
 }

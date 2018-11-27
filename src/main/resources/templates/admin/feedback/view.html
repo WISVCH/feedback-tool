@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/admin"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CH Feedback Tool | View Feedback</title>
+</head>
+<body>
+	<div layout:fragment="content">
+        <div class="row mb-4">
+            <div class="col">
+                <a class="btn btn-info" th:href="${redirect}">
+                    <i class="fas fa-fw fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h2 class="display-4">
+                    <span th:text="${feedback.subject}"></span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-7">
+                <div class="card mb-3">
+                    <h5 class="card-header">Feedback
+                        <span class="badge badge-info" th:if="${feedback.handled}">Archived</span>
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text" th:text="${feedback.body}"></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <a th:if="${!feedback.handled}" th:href="@{/admin/handle/} + ${feedback.key}"
+                           class="btn btn-block btn-info">
+                            <i class="fas fa-archive"></i> Archive
+                        </a>
+                        <a th:if="${feedback.handled}" th:href="@{/admin/handle/} + ${feedback.key}"
+                           class="btn btn-block btn-info">
+                            <i class="fas fa-archive"></i> Unarchive
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="card mb-3">
+                    <h5 class="card-header">Details</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <label class="col-3 control-label">Type</label>
+                            <div class="col-9">
+                                <i th:if="${feedback.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Positive}"
+                                   class="fas fa-smile fa-fw text-success"></i>
+                                <i th:if="${feedback.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Negative}"
+                                   class="fas fa-frown fa-fw text-danger"></i>
+                                <i th:if="${feedback.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Suggestion}"
+                                   class="fas fa-meh fa-fw text-warning"></i>
+                                <span th:text="${feedback.feedbackType}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-3 control-label">Posted on</label>
+                            <div class="col-9"
+                                 th:text="${#calendars.format(feedback.postedOn, 'dd/MM/yyyy hh:mm:ss')}"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-3 control-label">Handled on</label>
+                            <div class="col-9"
+                                 th:if="${feedback.handledOn != null}"
+                                 th:text="${#calendars.format(feedback.handledOn, 'dd/MM/yyyy hh:mm:ss')}"></div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-3 control-label">Sender name</label>
+                            <div class="col-9" th:text="${feedback.senderName}"></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-3 control-label">Sender mail</label>
+                            <div class="col-9">
+                                <a class="form-control-static" th:text="${feedback.senderMail}"
+                                   th:href="'mailto:' + ${feedback.senderMail} + '?Subject=Reaction%20feedback: ' + ${feedback.subject}">sender
+                                    mail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" th:if="${feedback instanceof T(ch.wisv.domain.feedback.EducationFeedback)}">
+                    <h5 class="card-header">Course</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <label class="col-3 control-label">Course</label>
+                            <div class="col-9" th:text="${feedback.course.name}"></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-3 control-label">Course code</label>
+                            <div class="col-9" th:text="${feedback.course.courseCode}"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-3 control-label">Program</label>
+                            <div class="col-9" th:text="${feedback.course.programEnum}"></div>
+                        </div>
+                        <div class="row">
+                            <label class="col-3 control-label">Instructors</label>
+                            <div class="col-9">
+                                <table>
+                                    <tbody>
+                                    <tr th:each="instructor : ${feedback.course.instructors}">
+                                        <td th:text="${instructor.name} + '&emsp;'">name</td>
+                                        <td><a href="#"
+                                               th:href="'mailto:' + ${instructor.mail} + '?Subject=Feedback regarding ' + ${feedback.course.courseCode}"
+                                               th:text="${instructor.mail}">mail</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</body>
+</html>

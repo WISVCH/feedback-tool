@@ -49,7 +49,10 @@
             <tbody>
             <tr th:each="post : ${feedbackOnCourse}" th:attr="data-key=${post.getKey()}">
                 <td th:text="${#calendars.format(post.postedOn,'dd/MM/yyyy HH:mm:ss')}">posted on</td>
-                <td th:text="${post.subject}">subject</td>
+                <td>
+                    <span th:text="${post.subject}">subject</span>
+                    <span class="badge badge-info" th:if="${post.handled}">Archived</span>
+                </td>
                 <td>
                     <i th:if="${post.feedbackType == T(ch.wisv.domain.feedback.FeedbackType).Positive}"
                        class="fas fa-smile fa-fw text-success"></i>
@@ -60,8 +63,13 @@
                     <span th:text="${post.feedbackType}"></span>
                 </td>
                 <td class="text-right">
-                    <a class="btn btn-sm btn-info" th:href="@{'/admin/handle/' + ${post.key}}">
+                    <a th:if="${!post.handled}" th:href="@{/admin/handle/} + ${post.key}"
+                       class="btn btn-sm btn-info">
                         <i class="fas fa-archive"></i> Archive
+                    </a>
+                    <a th:if="${post.handled}" th:href="@{/admin/handle/} + ${post.key}"
+                       class="btn btn-sm btn-info">
+                        <i class="fas fa-archive"></i> Unarchive
                     </a>
                 </td>
             </tr>

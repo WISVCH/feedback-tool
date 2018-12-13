@@ -63,7 +63,8 @@ public class EducationFeedbackController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes, Model model
     ) {
-        Course course = courseService.get(educationFeedback.getCourseCode().toUpperCase());
+        String courseCode = educationFeedback.getCourseCode().toUpperCase().split(" ")[0];
+        Course course = courseService.get(courseCode);
         if (course == null) {
             model.addAttribute("courseCodeError", "");
             model.addAttribute("courses", courseService.list());

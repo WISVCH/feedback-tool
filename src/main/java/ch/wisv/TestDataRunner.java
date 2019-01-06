@@ -10,11 +10,12 @@ import ch.wisv.repository.AssociationFeedbackRepository;
 import ch.wisv.repository.CourseRepository;
 import ch.wisv.repository.EducationFeedbackRepository;
 import ch.wisv.repository.InstructorRepository;
-import com.google.common.collect.ImmutableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
 
 @Component
 @Profile("dev")
@@ -46,7 +47,6 @@ public class TestDataRunner implements CommandLineRunner {
      * Callback used to run the bean.
      *
      * @param args incoming main method arguments
-     *
      * @throws Exception on error
      */
     @Override
@@ -54,7 +54,7 @@ public class TestDataRunner implements CommandLineRunner {
         Instructor instructor = new Instructor("Prof. T Esting", "tom@testing.tudelft.nl");
         instructorRepository.save(instructor);
 
-        Course course = new Course("TI1206", "Test course", ImmutableList.of(instructor), ProgramEnum.BScTI);
+        Course course = new Course("TI1206", "Test course", Collections.singletonList(instructor), ProgramEnum.BScTI);
         courseRepository.save(course);
 
         EducationFeedback educationFeedback = new EducationFeedback(

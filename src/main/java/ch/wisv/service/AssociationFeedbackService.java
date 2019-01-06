@@ -1,7 +1,7 @@
 package ch.wisv.service;
 
-import ch.wisv.repository.AssociationFeedbackRepository;
 import ch.wisv.domain.feedback.AssociationFeedback;
+import ch.wisv.repository.AssociationFeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +30,5 @@ public class AssociationFeedbackService {
 
     public List<AssociationFeedback> listArchive() {
         return associationFeedbackRepository.findAllByHandledIsTrueOrderByPostedOnDesc();
-    }
-
-    public AssociationFeedback get(long id) {
-        return associationFeedbackRepository.findOne(id);
     }
 }

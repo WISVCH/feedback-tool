@@ -1,9 +1,12 @@
 package ch.wisv.domain.course;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**

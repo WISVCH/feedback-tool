@@ -63,7 +63,8 @@ public class TestDataRunner implements CommandLineRunner {
                 "Test feedback subject",
                 "Test feedback body",
                 "Marc von Ramstein",
-                "marc@marc.marc"
+                "marc@marc.marc",
+                ""
         );
         educationFeedbackRepository.save(educationFeedback);
 
@@ -71,6 +72,7 @@ public class TestDataRunner implements CommandLineRunner {
                 FeedbackType.Positive,
                 "Test feedback subject",
                 "Test feedback body",
+                "",
                 "",
                 ""
         );

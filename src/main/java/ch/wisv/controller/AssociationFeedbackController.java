@@ -2,6 +2,7 @@ package ch.wisv.controller;
 
 import ch.wisv.domain.feedback.AssociationFeedback;
 import ch.wisv.service.AssociationFeedbackService;
+import ch.wisv.service.CaptchaService;
 import ch.wisv.service.NotificationService;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -63,6 +64,12 @@ public class AssociationFeedbackController {
 
             return "association/associationForm";
         } else {
+            CaptchaService captchaService = new CaptchaService();
+            if (!captchaService.validateCaptcha(associationFeedback.getCaptchaResponse())) {
+                // TODO Add error message.
+                return "association/associationForm";
+            }
+
             associationFeedbackService.save(associationFeedback);
             notificationService.sendNotifications(associationFeedback);
             redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +

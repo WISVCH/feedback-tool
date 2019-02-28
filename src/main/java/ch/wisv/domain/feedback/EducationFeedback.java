@@ -32,9 +32,10 @@ public class EducationFeedback extends Feedback {
             String subject,
             String body,
             String senderName,
-            String senderMail
+            String senderMail,
+            String captchaResponse
     ) {
-        super(feedbackType, subject, body, senderName, senderMail);
+        super(feedbackType, subject, body, senderName, senderMail, captchaResponse);
         this.course = course;
         this.courseCode = course.getCourseCode();
     }

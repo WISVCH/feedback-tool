@@ -26,6 +26,10 @@ wisvch:
       - chbeheer
       - bestuur
       - vc
+  recaptcha:
+    site: [YOUR SITE KEY]
+    secret: [YOUR SECRET KEY]
+    verifyURI: https://www.google.com/recaptcha/api/siteverify
 
 mailNotifications:
   from: noreply@ch.tudelft.nl

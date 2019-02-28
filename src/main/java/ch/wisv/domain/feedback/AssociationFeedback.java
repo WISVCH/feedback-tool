@@ -22,8 +22,9 @@ public class AssociationFeedback extends Feedback {
             String subject,
             String body,
             String senderName,
-            String senderMail
+            String senderMail,
+            String captchaResponse
     ) {
-        super(feedbackType, subject, body, senderName, senderMail);
+        super(feedbackType, subject, body, senderName, senderMail, captchaResponse);
     }
 }

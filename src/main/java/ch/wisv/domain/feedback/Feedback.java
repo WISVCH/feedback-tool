@@ -84,12 +84,6 @@ public abstract class Feedback {
     String senderMail;
 
     /**
-     * The reCAPTCHA response the user sends from the client side validation
-     */
-    @Transient
-    String captchaResponse;
-
-    /**
      * Default constructor.
      */
     public Feedback() {
@@ -106,8 +100,7 @@ public abstract class Feedback {
             String subject,
             String body,
             String senderName,
-            String senderMail,
-            String captchaResponse
+            String senderMail
     ) {
         this();
         this.feedbackType = feedbackType;
@@ -115,6 +108,5 @@ public abstract class Feedback {
         this.body = body;
         this.senderName = senderName;
         this.senderMail = senderMail;
-        this.captchaResponse = captchaResponse;
     }
 }

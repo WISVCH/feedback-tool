@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -28,14 +25,17 @@ public class AssociationFeedbackController {
     private AssociationFeedbackService associationFeedbackService;
     /** Service for mail notifications. */
     private NotificationService notificationService;
+    /** Service to handle captcha validation */
+    private final CaptchaService captchaService;
 
     /**
      * Autowired constructor.
      */
     @Autowired
-    public AssociationFeedbackController(AssociationFeedbackService associationFeedbackService, NotificationService notificationService) {
+    public AssociationFeedbackController(AssociationFeedbackService associationFeedbackService, NotificationService notificationService, CaptchaService captchaService) {
         this.associationFeedbackService = associationFeedbackService;
         this.notificationService = notificationService;
+        this.captchaService = captchaService;
     }
 
     /**
@@ -57,16 +57,17 @@ public class AssociationFeedbackController {
             @Valid @ModelAttribute("feedback") AssociationFeedback associationFeedback,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            Model model
-    ) {
+            Model model,
+            @RequestParam(value="g-recaptcha-response") String clientResponse
+            ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("feedback", associationFeedback);
 
             return "association/associationForm";
         } else {
-            CaptchaService captchaService = new CaptchaService();
-            if (!captchaService.validateCaptcha(associationFeedback.getCaptchaResponse())) {
-                // TODO Add error message.
+            if (!captchaService.validateCaptcha(clientResponse)) {
+                model.addAttribute("feedback", associationFeedback);
+                model.addAttribute("captchaError", true);
                 return "association/associationForm";
             }
 

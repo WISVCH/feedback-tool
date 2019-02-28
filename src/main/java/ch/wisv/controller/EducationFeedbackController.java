@@ -2,6 +2,7 @@ package ch.wisv.controller;
 
 import ch.wisv.domain.course.Course;
 import ch.wisv.domain.feedback.EducationFeedback;
+import ch.wisv.service.CaptchaService;
 import ch.wisv.service.CourseService;
 import ch.wisv.service.EducationFeedbackService;
 import ch.wisv.service.NotificationService;
@@ -11,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -31,15 +29,18 @@ public class EducationFeedbackController {
     private CourseService courseService;
     /** Service for mail notifications. */
     private NotificationService notificationService;
+    /** Service to handle captcha validation */
+    private final CaptchaService captchaService;
 
     /**
      * Autowired constructor.
      */
     @Autowired
-    public EducationFeedbackController(EducationFeedbackService educationFeedbackService, CourseService courseService, NotificationService notificationService) {
+    public EducationFeedbackController(EducationFeedbackService educationFeedbackService, CourseService courseService, NotificationService notificationService, CaptchaService captchaService) {
         this.educationFeedbackService = educationFeedbackService;
         this.courseService = courseService;
         this.notificationService = notificationService;
+        this.captchaService = captchaService;
     }
 
     /**
@@ -61,7 +62,9 @@ public class EducationFeedbackController {
     public String save(
             @Valid @ModelAttribute("feedback") EducationFeedback educationFeedback,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes, Model model
+            RedirectAttributes redirectAttributes,
+            Model model,
+            @RequestParam(value="g-recaptcha-response") String clientResponse
     ) {
         Course course = courseService.get(educationFeedback.getCourseCode().toUpperCase());
         if (course == null) {
@@ -76,6 +79,12 @@ public class EducationFeedbackController {
             model.addAttribute("feedback", educationFeedback);
 
             return "education/educationForm";
+        }
+
+        if (!captchaService.validateCaptcha(clientResponse)) {
+            model.addAttribute("feedback", educationFeedback);
+            model.addAttribute("captchaError", true);
+            return "association/associationForm";
         }
 
         educationFeedback.setCourse(course);

@@ -4,6 +4,7 @@
 	  layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
 	<title>CH FeedbackTool</title>
+    <script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
 </head>
 <body>
 		
@@ -105,6 +106,20 @@
                             <small class="help-text text-muted">
                                 Fill in your email to receive a copy of your feedback
                             </small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-9 offset-md-3">
+                            <div class="g-recaptcha"
+                                 th:attr="data-sitekey=${@environment.getProperty('wisvch.recaptcha.site')}"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <div class="row" th:if="${captchaError}">
+                        <div class="col-12 col-md-9 offset-md-3">
+                            <div class="alert alert-warning">Invalid captcha. Please try again.</div>
                         </div>
                     </div>
 

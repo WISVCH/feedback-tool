@@ -1,16 +1,23 @@
 package ch.wisv.controller;
 
 import ch.wisv.domain.feedback.AssociationFeedback;
+import ch.wisv.domain.feedback.EducationFeedback;
 import ch.wisv.service.AssociationFeedbackService;
 import ch.wisv.service.CaptchaService;
 import ch.wisv.service.NotificationService;
+import ch.wisv.util.BindingResultBuilder;
+import java.util.HashMap;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -43,7 +50,13 @@ public class AssociationFeedbackController {
      */
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("feedback", new AssociationFeedback());
+        if (!model.containsAttribute("feedback")) {
+            model.addAttribute("feedback", new EducationFeedback());
+        }
+
+        if (!model.containsAttribute("errors")) {
+            model.addAttribute("errors", new HashMap<String, String>());
+        }
 
         return "association/associationForm";
     }
@@ -57,26 +70,23 @@ public class AssociationFeedbackController {
             @Valid @ModelAttribute("feedback") AssociationFeedback associationFeedback,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            Model model,
             @RequestParam(value="g-recaptcha-response") String clientResponse
-            ) {
+    ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("feedback", associationFeedback);
-
-            return "association/associationForm";
+            redirectAttributes.addFlashAttribute("errors", BindingResultBuilder.createErrorMap(bindingResult));
+        } else if (!captchaService.validateCaptcha(clientResponse)) {
+            redirectAttributes.addFlashAttribute("captchaError", true);
         } else {
-            if (!captchaService.validateCaptcha(clientResponse)) {
-                model.addAttribute("feedback", associationFeedback);
-                model.addAttribute("captchaError", true);
-                return "association/associationForm";
-            }
-
             associationFeedbackService.save(associationFeedback);
             notificationService.sendNotifications(associationFeedback);
             redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +
                     " If you filled in your email, you will find a copy of your feedback in your mail.");
 
-            return "redirect:/association/create";
+            associationFeedback = new AssociationFeedback();
         }
+
+        redirectAttributes.addFlashAttribute("feedback", associationFeedback);
+
+        return "redirect:/association/create";
     }
 }

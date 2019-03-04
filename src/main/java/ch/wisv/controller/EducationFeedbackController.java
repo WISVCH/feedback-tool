@@ -1,18 +1,26 @@
 package ch.wisv.controller;
 
 import ch.wisv.domain.course.Course;
+import ch.wisv.domain.feedback.AssociationFeedback;
 import ch.wisv.domain.feedback.EducationFeedback;
 import ch.wisv.service.CaptchaService;
 import ch.wisv.service.CourseService;
 import ch.wisv.service.EducationFeedbackService;
 import ch.wisv.service.NotificationService;
+import ch.wisv.util.BindingResultBuilder;
+import com.google.common.collect.ImmutableMap;
+import java.util.HashMap;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -48,7 +56,14 @@ public class EducationFeedbackController {
      */
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("feedback", new EducationFeedback());
+        if (!model.containsAttribute("feedback")) {
+            model.addAttribute("feedback", new EducationFeedback());
+        }
+
+        if (!model.containsAttribute("errors")) {
+            model.addAttribute("errors", new HashMap<String, String>());
+        }
+
         model.addAttribute("courses", courseService.list());
 
         return "education/educationForm";
@@ -63,35 +78,27 @@ public class EducationFeedbackController {
             @Valid @ModelAttribute("feedback") EducationFeedback educationFeedback,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            Model model,
             @RequestParam(value="g-recaptcha-response") String clientResponse
     ) {
         Course course = courseService.get(educationFeedback.getCourseCode().toUpperCase());
+
         if (course == null) {
-            model.addAttribute("courseCodeError", "");
-            model.addAttribute("courses", courseService.list());
-            model.addAttribute("feedback", educationFeedback);
+            redirectAttributes.addFlashAttribute("errors", ImmutableMap.of("courseCode", true));
+        } else if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", BindingResultBuilder.createErrorMap(bindingResult));
+        } else if (!captchaService.validateCaptcha(clientResponse)) {
+            redirectAttributes.addFlashAttribute("captchaError", true);
+        } else {
+            educationFeedback.setCourse(course);
+            educationFeedbackService.save(educationFeedback);
+            notificationService.sendNotifications(educationFeedback);
+            redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +
+                    " If you filled in your email, you will find a copy of your feedback in your mail.");
 
-            return "education/educationForm";
-        }
-        if(bindingResult.hasErrors()) {
-            model.addAttribute("courses", courseService.list());
-            model.addAttribute("feedback", educationFeedback);
-
-            return "education/educationForm";
-        }
-
-        if (!captchaService.validateCaptcha(clientResponse)) {
-            model.addAttribute("feedback", educationFeedback);
-            model.addAttribute("captchaError", true);
-            return "association/associationForm";
+            educationFeedback = new EducationFeedback();
         }
 
-        educationFeedback.setCourse(course);
-        educationFeedbackService.save(educationFeedback);
-        notificationService.sendNotifications(educationFeedback);
-        redirectAttributes.addFlashAttribute("message", "Thanks! Your feedback has been submitted." +
-                " If you filled in your email, you will find a copy of your feedback in your mail.");
+        redirectAttributes.addFlashAttribute("feedback", educationFeedback);
 
         return "redirect:/education/create";
     }

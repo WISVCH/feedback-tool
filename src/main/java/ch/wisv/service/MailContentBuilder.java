@@ -5,7 +5,6 @@ import ch.wisv.domain.feedback.EducationFeedback;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -14,11 +13,11 @@ import org.thymeleaf.context.Context;
  * Created by Tom on 06/05/2017.
  */
 @Service
-@ConfigurationProperties(prefix = "wisvch.connect")
 public class MailContentBuilder {
     private TemplateEngine templateEngine;
 
-    @Setter @Getter
+    @Setter
+    @Getter
     private String clientUri;
 
     @Autowired

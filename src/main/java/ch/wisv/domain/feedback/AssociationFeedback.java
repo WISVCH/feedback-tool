@@ -1,13 +1,16 @@
 package ch.wisv.domain.feedback;
 
-import javax.persistence.Entity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.Entity;
 
 /**
  * Created by Tom on 29/04/2017.
  */
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AssociationFeedback extends Feedback {
 
     public AssociationFeedback() {

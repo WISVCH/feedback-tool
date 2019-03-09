@@ -16,7 +16,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-@ConfigurationProperties(prefix = "mailNotifications")
+@ConfigurationProperties(prefix = "mail-notifications")
 public class NotificationService {
 	@Getter @Setter
 	private String from;

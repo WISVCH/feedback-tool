@@ -1,0 +1,13 @@
+spring:
+  flyway:
+    enabled: false
+  security:
+    oauth2:
+      client:
+        registration:
+          wisvchconnect:
+            client-id: localhost-spring-dev
+            client-secret: Hvw51WUpYdSRhJ6hrxNSNQyXK0jv3M6-dRxVhfUhEuVz9PvH8hVMz51SeGajsIVT_C5l0KyzjrnfvNyGzbiW3A
+logging:
+  level:
+    org.springframework: DEBUG

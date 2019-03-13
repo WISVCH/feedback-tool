@@ -24,6 +24,7 @@ jar {
 }
 
 sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -62,6 +63,8 @@ dependencies {
     compile 'org.webjars:jquery:3.3.1-1'
     compile 'org.webjars:awesomplete:1.1.4'
     compile 'org.webjars:datatables:1.10.19'
+
+    compile 'com.google.guava:guava:27.1-jre'
 }
 
 eclipse {

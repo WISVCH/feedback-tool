@@ -31,6 +31,8 @@ out/
 !src/main/resources/example-properties.properties
 !gradle-wrapper.properties
 
+application.yml
+
 .gradle/
 config/
 !src/main/java/ch/wisv/config/

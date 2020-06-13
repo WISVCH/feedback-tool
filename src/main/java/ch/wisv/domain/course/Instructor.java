@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by Tom on 14/05/2017.

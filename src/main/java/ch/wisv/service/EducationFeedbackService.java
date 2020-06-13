@@ -28,10 +28,6 @@ public class EducationFeedbackService {
         return educationFeedbackRepository.findAllByOrderByPostedOnDesc();
     }
 
-    public EducationFeedback get(long id) {
-        return educationFeedbackRepository.findOne(id);
-    }
-
     public List<EducationFeedback> listInbox() {
         return educationFeedbackRepository.findAllByHandledIsFalseOrderByPostedOnDesc();
     }

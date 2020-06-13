@@ -4,6 +4,7 @@
 	  layout:decorator="layouts/main" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
 	<title>CH FeedbackTool</title>
+    <script src="https://www.google.com/recaptcha/api.js" async="async" defer="defer"></script>
 </head>
 <body>
 		
@@ -18,7 +19,7 @@
             <div class="col-12 col-md-10 col-lg-8">
                 <div th:if="${message}" class="alert alert-success" role="alert" th:text="${message}"></div>
 
-                <div th:if="${courseCodeError}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div th:if="${errors.containsKey('courseCode')}" class="alert alert-danger alert-dismissible fade show" role="alert">
                     You entered an unknown course code. If you entered a correct course code, please click
                     <a href="#"
                        th:href="'mailto:education@ch.tudelft.nl?subject=Course missing in FeedbackTool'">here</a>
@@ -44,22 +45,22 @@
                                     </div>
                                 </label>
                             </div>
-                            <span th:errors="*{feedbackType}" class="d-block invalid-feedback">Type Errors</span>
+                            <span th:text="${errors.get('feedbackType')}" class="d-block invalid-feedback">Type Errors</span>
                         </div>
                     </div>
 
-                    <div class="form-group row" th:classappend="${#fields.hasErrors('courseCode')}? 'has-error'">
+                    <div class="form-group row" th:classappend="${errors.containsKey('courseCode')} ? 'is-invalid'">
                         <label class="col-12 col-md-3 control-label">Course code<span class="required">*</span></label>
                         <div class="col-12 col-md-9">
                             <input type="text" class="form-control awesomplete" list="courses" th:field="*{courseCode}"
                                    placeholder="Type the course code or name" autocomplete="off"
-                                   th:classappend="${#fields.hasErrors('courseCode')} ? 'is-invalid'"/>
+                                   th:classappend="${errors.containsKey('courseCode')} ? 'is-invalid'"/>
                             <datalist id="courses">
                                 <option th:each="course : ${courses}" th:value="${course.courseCode}"
                                         th:text="${course}">Course
                                 </option>
                             </datalist>
-                            <span th:errors="*{courseCode}" class="invalid-feedback">Course Errors</span>
+                            <span class="invalid-feedback" th:text="${errors.get('courseCode')}"></span>
                         </div>
                     </div>
 
@@ -68,9 +69,9 @@
                         <div class="col-12 col-md-9">
                             <input type="text" class="form-control" th:field="*{subject}"
                                    th:value="${feedback.getSubject()}"
-                                   th:classappend="${#fields.hasErrors('subject')} ? 'is-invalid'"
+                                   th:classappend="${errors.containsKey('subject')} ? 'is-invalid'"
                                    placeholder="Short description of your feedback"/>
-                            <span th:errors="*{subject}" class="invalid-feedback">Subject Errors</span>
+                            <span th:text="${errors.get('subject')}" class="invalid-feedback">Subject Errors</span>
                         </div>
                     </div>
 
@@ -79,8 +80,8 @@
                         <div class="col-12 col-md-9">
 							<textarea class="form-control" rows="7" placeholder="Tell us all about it!"
                                       th:field="*{body}" th:value="${feedback.getBody()}"
-                                      th:classappend="${#fields.hasErrors('body')} ? 'is-invalid'"></textarea>
-                            <span th:errors="*{body}" class="invalid-feedback">Body Errors</span>
+                                      th:classappend="${errors.containsKey('body')} ? 'is-invalid'"></textarea>
+                            <span th:text="${errors.get('body')}" class="invalid-feedback">Body Errors</span>
                         </div>
                     </div>
 
@@ -99,12 +100,26 @@
                             <input type="text" class="form-control" th:field="*{senderMail}"
                                    placeholder="(Optional) Your email"
                                    th:value="${feedback.getSenderMail()}"
-                                   th:classappend="${#fields.hasErrors('senderMail')} ? 'is-invalid'"/>
+                                   th:classappend="${errors.containsKey('senderMail')} ? 'is-invalid'"/>
 
-                            <span th:errors="*{senderMail}" class="invalid-feedback">Sender Mail Errors</span>
+                            <span th:text="${errors.get('senderMail')}" class="invalid-feedback">Sender Mail Errors</span>
                             <small class="help-text text-muted">
                                 Fill in your email to receive a copy of your feedback
                             </small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-9 offset-md-3">
+                            <div class="g-recaptcha"
+                                 th:attr="data-sitekey=${@environment.getProperty('wisvch.recaptcha.site')}"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <div class="row" th:if="${captchaError}">
+                        <div class="col-12 col-md-9 offset-md-3">
+                            <div class="alert alert-warning">Invalid captcha. Please try again.</div>
                         </div>
                     </div>
 

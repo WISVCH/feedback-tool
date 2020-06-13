@@ -1,9 +1,8 @@
-sudo: required
-services:
-- docker
 language: java
+services:
+  - docker
 jdk:
-- oraclejdk8
+- openjdk11
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -12,14 +11,17 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 script:
-- "./gradlew build"
-- if [ "${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}" == "master" ]; then docker
-  build --no-cache --pull -t quay.io/wisvch/feedback-tool:$TRAVIS_BUILD_NUMBER .;
-  fi
-after_success:
-- if [ "${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}" == "master" ]; then docker
-  login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" quay.io; docker push quay.io/wisvch/feedback-tool:$TRAVIS_BUILD_NUMBER;
-  fi
+- "./gradlew check"
+deploy:
+  provider: script
+  script: >-
+    sh -c '
+    docker build --no-cache --pull -t quay.io/wisvch/feedback-tool:$TRAVIS_BUILD_NUMBER .;
+    docker login -u "$QUAY_USERNAME" -p "$QUAY_PASSWORD" quay.io;
+    docker push quay.io/wisvch/feedback-tool:$TRAVIS_BUILD_NUMBER;
+    '
+  on:
+    branch: master
 notifications:
   email: false
   slack:
